@@ -3,7 +3,7 @@ import {
 } from 'ramda';
 
 import useCollection from './useCollection';
-import { isNilOrEmpty } from '../../gql-functional/lib/utils/isNilOrEmpty';
+import isNilOrEmpty from '../lib/isNilOrEmpty';
 import { docId, withoutId } from '../lib/id';
 
 /**

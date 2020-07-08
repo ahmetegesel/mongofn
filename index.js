@@ -1,3 +1,5 @@
+export { mapResultWith, toDoc, toModel } from './src/mapResult';
+
 export createClient from './src/createClient';
 export useDatabase from './src/useDatabase';
 export useCollection from './src/useCollection';

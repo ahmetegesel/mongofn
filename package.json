@@ -1,11 +1,37 @@
 {
   "name": "functional-mongo",
-  "version": "0.1.0",
+  "version": "0.2.11",
   "description": "A Fully Functional Library to perform MongoDB operations",
-  "main": "index.js",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
-    "prepublishOnly": "babel ./src -d ./dist"
+    "clean": "rimraf es/* dist/*",
+    "build:es": "babel . --out-dir ./es --ignore node_modules typings",
+    "build:cjs": "babel . --out-dir ./dist --ignore node_modules typings",
+    "build": "npm run build:es && npm run build:cjs",
+    "precommit": "npm run lint",
+    "prepare": "npm run precommit && npm run clean && npm run build"
+  },
+  "main": "./dist/index.js",
+  "module": "./es/index.js",
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./es/index.js",
+      "default": "./src/index.js"
+    },
+    "./es/": "./es/",
+    "./src/": "./src/",
+    "./dist/": "./dist/"
+  },
+  "files": [
+    "es",
+    "dist",
+    "src",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/ahmetegesel/functional-mongo.git"
   },
   "dependencies": {
     "ramda": "^0.27.0",
@@ -23,7 +49,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-import": "^2.22.0",
     "babel-eslint": "^10.1.0",
-    "@types/ramda": "^0.27.6"
+    "@types/ramda": "^0.27.6",
+    "rimraf": "^3.0.2"
   },
   "keywords": [
     "mongodb",

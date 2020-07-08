@@ -41,10 +41,6 @@ const findByObjectId = curryN(
   (...args) => {
     const id = last(args);
 
-    if (!(id instanceof ObjectId)) {
-      throw new Error('Id must be type of ObjectId');
-    }
-
     return findById(...init(args))(new ObjectId(id));
   },
 );

@@ -4,7 +4,7 @@ import {
 
 import {
   castDocId, docId, modelId, removeUndefinedId,
-} from './id';
+} from '../lib/id';
 
 export const mapResultWith = curry(
   (transform, result) => cond(
