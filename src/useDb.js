@@ -40,8 +40,8 @@ import createClient from './createClient';
  */
 const useDb = curry((client, databaseName) => {
   const clientP = cond([
-    [isFunction, (fn) => fn()],
     [isString, createClient],
+    [isFunction, (fn) => fn()],
     [isPromise, identity],
     [T, (obj) => Promise.resolve(obj)],
   ])(client);
