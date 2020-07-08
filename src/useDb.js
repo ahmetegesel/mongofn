@@ -2,7 +2,7 @@ import {
   cond, curry, identity, T,
 } from 'ramda';
 
-import { isFunction, isPromise } from '../lib/type';
+import { isFunction, isPromise, isString } from '../lib/type';
 import createClient from './createClient';
 
 /**
@@ -41,6 +41,7 @@ import createClient from './createClient';
 const useDb = curry((client, databaseName) => {
   const clientP = cond([
     [isFunction, (fn) => fn()],
+    [isString, createClient],
     [isPromise, identity],
     [T, (obj) => Promise.resolve(obj)],
   ])(client);
@@ -49,7 +50,3 @@ const useDb = curry((client, databaseName) => {
 });
 
 export default useDb;
-
-const client = createClient('mongodb://root:rootpassword@localhost:27017');
-const useMainDb = () => useDb(client, 'pho');
-useMainDb().then(console.log)

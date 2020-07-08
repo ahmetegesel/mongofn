@@ -50,4 +50,3 @@ const useCollection = uncurryN(
 );
 
 export default useCollection;
-

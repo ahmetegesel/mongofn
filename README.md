@@ -1,21 +1,22 @@
 # Mongof
 
-A practical functional library to use some of the key features that [mongodb](https://www.npmjs.com/package/mongodb) 
-provide in functional programming way. 
+A practical functional programming library to use some of the key features that [mongodb](https://www.npmjs.com/package/mongodb) 
+provide. 
 
 Focus of the library is definitely not to provide all features that `mongodb` provides.
 Instead, Mongof will provide you the most common functions wrapped with curried functions, 
-so that you can skip initial setup for client and retrieval of db and collection objects,
+so that you can skip initial setup for `client` and retrieval of `db` and `collection` objects,
 and make them extremely reusable across your entire project.
 
-Library is completely dependent on [ramda](https://github.com/ramda/ramda) library to
+Note: Mongof is completely dependent on [ramda](https://github.com/ramda/ramda) library to
 provide functional programming style for mongodb.
 
 ## Why Mongof?
 
 It is simple and extremely extensible with the power of functional programming paradigm.
 Since the most of the functions provided are curried functions, 
-you can make your usage of these functions partially recomposable very easily.
+you can benefit from it by recomposing your implementations with different combinations of
+arguments of functions as much as you need.
 
 See [this](https://fr.umio.us/favoring-curry/) for more info about currying.
 
@@ -25,15 +26,64 @@ Simply run the following command:
 
 `$ npm install mongof`
 
+## What is the difference?
+
+Performing simple read operation using original `mongodb` connector:
+
+```
+// simple usage from official MongoDb Docs
+
+// Connection URL
+const url = 'mongodb://localhost:27017';
+
+// Database Name
+const dbName = 'myproject';
+
+// Create a new MongoClient
+const client = new MongoClient(url);
+
+// Use connect method to connect to the Server
+client.connect(function(err) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+
+  const db = client.db(dbName);
+
+  client.close();
+});
+```
+
+To be able to reuse this code snippet you may be storing the client instance
+somewhere and reach it from other place in your project, but it is still done
+imperatively. 
+
+Here is a collection usage in Mongof:
+
+```
+// Connection URL
+const url = 'mongodb://localhost:27017';
+
+const useMainDb = useCollection(url, 'mainDb');
+
+const categoriesCol = useMaindDb('collections')
+    .then(collection => collection.find({}).toArray());
+const articlesCol = useMainDb('articles')
+    .then(collection => collection.find({}).toArray());
+```
+
+It is simpler and reusable. When you pass url as first argument to useCollection function,
+it caches the client and reuse it every time you call the function. You can recompose
+this kind of functions and export them as util functions from somewhere and use whenever 
+you need without any additional setup.
+
 ## Usage
 
 Mongof essentially provides you some useful functions to connect a MongoDB client,
-and perform most used operations on a MongoDB instance including executing query, 
-and saving document. 
+and perform most used operations on a MongoDB instance including CRUD operations. 
 
 Also, Mongof provides `useDb` and `useCollection` functions
-that simply gives you original results from `mongodb` for you to freely perform 
-all kinds of `mongodb` operations that Mongof does not wrap yet.
+that simply give you original `Db` and `Collection` objects from `mongodb`,
+then you can freely perform all kinds of `mongodb` operations.
 
 ### Connecting a MongoDB instance
 

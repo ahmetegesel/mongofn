@@ -13,11 +13,11 @@ export const DEFAULT_OPTIONS = {
 };
 
 /**
- * It can be either a function that return `MongoClient` instance
- * in a `Promise`, or it can be `Promise` that resolves a `MongoClient`,
- * or else it can be direct `MongoClient` instance.
+ * It can be either a connectionString as it is documented at official mongodb docs,
+ * it can be a function that return `MongoClient` instance in a `Promise`, it can be `Promise` that resolves a `MongoClient`,
+ * or it can simply be direct `MongoClient` instance.
  *
- * @typedef {(function<Promise<MongoClient>>|PromisePromise<MongoClient>|MongoClient)} MongoClientLike
+ * @typedef {(string|function<Promise<MongoClient>>|Promise<MongoClient>|MongoClient)} MongoClientLike
  * */
 
 /**

@@ -1,6 +1,6 @@
 {
   "name": "mongof",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
