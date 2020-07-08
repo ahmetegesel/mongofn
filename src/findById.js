@@ -1,4 +1,6 @@
-import { andThen, inc, pipe, uncurryN } from 'ramda';
+import {
+  andThen, inc, pipe, uncurryN,
+} from 'ramda';
 
 import useCollection from './useCollection';
 

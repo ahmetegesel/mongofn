@@ -1,6 +1,8 @@
-import { always, call, cond, curry, identity, T, tap, type } from 'ramda';
-import createClient from './createClient';
-import { isFunction, isPromise, isTypeOf } from '../lib/type';
+import {
+  cond, curry, identity, T,
+} from 'ramda';
+
+import { isFunction, isPromise } from '../lib/type';
 
 /**
  * Takes a {@link MongoClientLike} and a database name, then returns `Promise` which resolves
@@ -37,9 +39,9 @@ import { isFunction, isPromise, isTypeOf } from '../lib/type';
  */
 const useDatabase = curry((client, databaseName) => {
   const clientP = cond([
-    [isFunction, fn => fn()],
+    [isFunction, (fn) => fn()],
     [isPromise, identity],
-    [T, obj => Promise.resolve(obj)],
+    [T, (obj) => Promise.resolve(obj)],
   ])(client);
 
   return clientP.then((c) => c.db(databaseName));

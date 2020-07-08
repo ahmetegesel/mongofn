@@ -1,6 +1,8 @@
-import { andThen, inc, pipe, uncurryN } from 'ramda';
+import {
+  andThen, inc, pipe, uncurryN,
+} from 'ramda';
+
 import useDatabase from './useDatabase';
-import createClient from './createClient';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, and a collection name, then returns `Promise` which resolves

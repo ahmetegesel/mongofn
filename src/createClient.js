@@ -27,7 +27,8 @@ export const DEFAULT_OPTIONS = {
  *
  * `connectionString` value should be as documented at [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
  *
- * `options` value should be as documented at [Official Manual](http://mongodb.github.io/node-mongodb-native/3.5/reference/connecting/connection-settings/).
+ * `options` value should be as documented at
+ * [Official Manual](http://mongodb.github.io/node-mongodb-native/3.5/reference/connecting/connection-settings/).
  *
  * Note that the client instance is cached by memoization of this function using
  * [memoizeWith](https://ramdajs.com/docs/#memoizeWith).

@@ -1,6 +1,7 @@
 import {
-  andThen, head, ifElse, pipe, prop, uncurryN,
+  andThen, head, ifElse, inc, pipe, prop, uncurryN,
 } from 'ramda';
+
 import useCollection from './useCollection';
 import { isNilOrEmpty } from '../../gql-functional/lib/utils/isNilOrEmpty';
 import { docId, withoutId } from '../lib/id';
@@ -71,7 +72,7 @@ export const handleFindOneAndUpdateResult = prop('value');
  *      upsertInSomeDb('comments', {_id: 'some id', approved: false}).then(comment => {});
  */
 const upsert = uncurryN(
-  3,
+  inc(useCollection.length),
   pipe(
     useCollection,
     uncurryN(

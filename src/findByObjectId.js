@@ -1,8 +1,7 @@
-import { complement, curryN, init, last } from 'ramda';
+import { curryN, init, last } from 'ramda';
 
 import { ObjectId } from 'mongodb';
 import findById from './findById';
-import { isNotTypeOf, isTypeOf } from '../lib/type';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and an {@link ObjectId}, then
@@ -43,7 +42,7 @@ const findByObjectId = curryN(
     const id = last(args);
 
     if (!(id instanceof ObjectId)) {
-      throw new Error('Id must be type of ObjectId')
+      throw new Error('Id must be type of ObjectId');
     }
 
     return findById(...init(args))(new ObjectId(id));
