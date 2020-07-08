@@ -1,0 +1,37 @@
+{
+  "name": "functional-mongo",
+  "version": "0.1.0",
+  "description": "A Fully Functional Library to perform MongoDB operations",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
+    "prepublishOnly": "babel ./src -d ./dist"
+  },
+  "dependencies": {
+    "ramda": "^0.27.0",
+    "mongodb": "^3.5.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-proposal-throw-expressions": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "babel-eslint": "^10.1.0",
+    "@types/ramda": "^0.27.6"
+  },
+  "keywords": [
+    "mongodb",
+    "nodejs",
+    "functional-programming",
+    "fp",
+    "ramda"
+  ],
+  "author": "Ahmet Egesel <ahmetegesel@hotmail.com>",
+  "license": "MIT"
+}
