@@ -20,12 +20,6 @@ arguments of functions as much as you need.
 
 See [this](https://fr.umio.us/favoring-curry/) for more info about currying.
 
-## Installation
-
-Simply run the following command:
-
-`$ npm install mongof`
-
 ## What is the difference?
 
 Performing simple read operation using original `mongodb` connector:
@@ -61,9 +55,9 @@ Here is a collection usage in Mongof:
 
 ```
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const connectionString = 'mongodb://localhost:27017';
 
-const useMainDb = useCollection(url, 'mainDb');
+const useMainDb = useCollection(connectionString, 'mainDb');
 
 const categoriesCol = useMaindDb('collections')
     .then(collection => collection.find({}).toArray());
@@ -75,6 +69,12 @@ It is simpler and reusable. When you pass url as first argument to useCollection
 it caches the client and reuse it every time you call the function. You can recompose
 this kind of functions and export them as util functions from somewhere and use whenever 
 you need without any additional setup.
+
+## Installation
+
+Simply run the following command:
+
+`$ npm install mongof`
 
 ## Usage
 
@@ -111,7 +111,7 @@ createClient(connectionString, options).then(client => {
 ```
 
 #### Memoization
-`createClient` is a memoized functtion, so it will return the same instance
+`createClient` is a memoized function, so it will return the same instance
 if you call it with the same arguments.
 
 For more info: see 
@@ -132,9 +132,9 @@ in declarative way.
 // useMainDb.js
 const { createClient, useDb } = require('mongof');
 
-const client = createClient(connectionString);
+const connectionString = 'mongodb://localhost:27017';
 
-export const useMainDb = () => useDb(client, 'mainDb');
+export const useMainDb = () => useDb(connectionString, 'mainDb');
 
 // someOther.js
 const { useMainDb } = require('./useMainDb');
@@ -153,9 +153,9 @@ Let's make an example of fetching all data that a collection contains.
 ```
 const { createClient, useCollection } = require('mongof');
 
-const client = createClient(connectionString);
+const connectionString = 'mongodb://localhost:27017';
 
-useCollection(client, 'mainDb', 'someCollection')
+useCollection(connectionString, 'mainDb', 'someCollection')
     .then(collection => {
             return collection.find({}).toArray(); // retrieve all
         }
@@ -172,16 +172,16 @@ currying.
 As we noted before, most of the functions are curried in Mongof.
 
 Let's make an example and compose a function which will help you use collections
-in a db without repeating code for set-up.
+in a db without repeating code for the setup.
 
 ```
 const { createClient, useCollection } = require('mongof');
 
-const client = createClient(connectionString);
+const connectionString = 'mongodb://localhost:27017';
 
 // Here we do not pass the last argument so that it will return another
 // function which accepts only collectionName argument
-const useCollectionInMainDb = useCollection(client, 'mainDb');
+const useCollectionInMainDb = useCollection(connectionString, 'mainDb');
 
 useCollectionInMainDb('categories').then(console.log);
 useCollectionInMainDb('articles').then(console.log);
@@ -198,9 +198,9 @@ to be able to recompose your function allowing partial application of any combin
 ```
 const { createClient, useCollection } = require('mongof');
 
-const client = createClient(connectionString);
+const connectionString = 'mongodb://localhost:27017';
 
-const useCategoriesIn = useCollection(client, __, 'categories');
+const useCategoriesIn = useCollection(connectionString, __, 'categories');
 
 useCategoriesIn('mainDb').then(console.log);
 useCategoriesIn('otherDb').then(console.log);
@@ -241,9 +241,9 @@ Here are some examples of usage.
 // findBy example
 const { createClient, findBy, __ } = require('mongof');
 
-const client = createClient(connectionString);
+const connectionString = 'mongodb://localhost:27017';
 
-const findInMaindDbBy = findBy(client, 'mainDb');
+const findInMaindDbBy = findBy(connectionString, 'mainDb');
 
 findInMaindDbBy('categories', { name: 'some Categery' }).then(console.log);
 findInMaindDbBy('articles', { name: 'some Categery' }).then(console.log);
