@@ -24,7 +24,7 @@ See [this](https://fr.umio.us/favoring-curry/) for more info about currying.
 
 Performing simple read operation using original `mongodb` connector:
 
-```
+```js
 // simple usage from official MongoDb Docs
 
 // Connection URL
@@ -53,7 +53,7 @@ imperatively.
 
 Here is a collection usage in Mongofn:
 
-```
+```js
 // Connection URL
 const connectionString = 'mongodb://localhost:27017';
 
@@ -72,9 +72,14 @@ you need without any additional setup.
 
 ## Installation
 
-Simply run the following command:
 
-`$ npm install Mongofn`
+```sh
+# Using npm
+npm install --save mongofn
+
+# Using yarn
+yarn add mongofn
+```
 
 ## Usage
 
@@ -90,7 +95,7 @@ then you can freely perform all kinds of `mongodb` operations.
 Before you can perform operations on a MongoDB instance, first we need to connect to it.
 To connect a MongoDB instance you can use `createClient` function.
 
-```
+```js
 const { createClient } = require('Mongofn');
 
 const connectionString = 'mongodb://root:rootpassword@localhost:27017';
@@ -128,7 +133,7 @@ using mongodb. In Mongofn, you can use `useDb` and `useCollection` functions whi
 accepts `client` as first argument to use with, to perform all kinds of `Db` and `Collection` 
 in declarative way.
 
-```
+```js
 // useMainDb.js
 const { createClient, useDb } = require('Mongofn');
 
@@ -150,7 +155,8 @@ However, before we dive into functional programming realm, let's first understan
 the basic usage of the function.
 
 Let's make an example of fetching all data that a collection contains.
-```
+
+```js
 const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
@@ -174,7 +180,7 @@ As we noted before, most of the functions are curried in Mongofn.
 Let's make an example and compose a function which will help you use collections
 in a db without repeating code for the setup.
 
-```
+```js
 const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
@@ -195,7 +201,7 @@ one crucial object `__`. It is a special placeholder which you can use in currie
 to be able to recompose your function allowing partial application of any combination
  f arguments, regardless of their positions.
  
-```
+```js
 const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
@@ -237,7 +243,7 @@ used `useDb` and `useCollection` functions.
 
 Here are some examples of usage.
 
-```
+```js
 // findBy example
 const { createClient, findBy, __ } = require('Mongofn');
 
