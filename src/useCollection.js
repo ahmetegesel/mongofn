@@ -2,7 +2,7 @@ import {
   andThen, inc, pipe, uncurryN,
 } from 'ramda';
 
-import useDatabase from './useDatabase';
+import useDb from './useDb';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, and a collection name, then returns `Promise` which resolves
@@ -21,7 +21,7 @@ import useDatabase from './useDatabase';
  * @param {string} databaseName Database name to get the collection from.
  * @param {string} collectionName Collection name.
  * @return {Promise<Collection>} MongoDB Collection.
- * @see {@link useDatabase}, {@link createClient}
+ * @see {@link useDb}, {@link createClient}
  * @example
  *
  *      // complete usage
@@ -42,11 +42,12 @@ import useDatabase from './useDatabase';
  *      useSomeCollectionIn('someOtherDb').then(collection => {});
  */
 const useCollection = uncurryN(
-  inc(useDatabase.length),
+  inc(useDb.length),
   pipe(
-    useDatabase,
+    useDb,
     uncurryN(2, (dbPromise) => (collectionName) => andThen((db) => db.collection(collectionName), dbPromise)),
   ),
 );
 
 export default useCollection;
+

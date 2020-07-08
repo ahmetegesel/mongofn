@@ -1,7 +1,9 @@
+export { __ } from 'ramda';
+
 export { mapResultWith, toDoc, toModel } from './src/mapResult';
 
 export createClient from './src/createClient';
-export useDatabase from './src/useDatabase';
+export useDb from './src/useDb';
 export useCollection from './src/useCollection';
 export findBy from './src/findBy';
 export findAll from './src/findAll';

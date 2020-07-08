@@ -3,6 +3,7 @@ import {
 } from 'ramda';
 
 import { isFunction, isPromise } from '../lib/type';
+import createClient from './createClient';
 
 /**
  * Takes a {@link MongoClientLike} and a database name, then returns `Promise` which resolves
@@ -15,7 +16,7 @@ import { isFunction, isPromise } from '../lib/type';
  * Since [Ramda](https://ramdajs.com/) is used for currying, you can also use [R.__](https://ramdajs.com/docs/#__)
  * placeholder to allow partial application of any combination of arguments of this particular function.
  *
- * @func useDatabase
+ * @func useDb
  * @type Function
  * @since v0.1.0
  * @param {MongoClientLike} client {@link MongoClient} instance
@@ -28,16 +29,16 @@ import { isFunction, isPromise } from '../lib/type';
  *      // See createClient docs for more information
  *      const client = createClient(...params);
  *
- *      useDatabase(client, 'databaseName').then(db => {
+ *      useDb(client, 'databaseName').then(db => {
  *        return collection.find({}).toArray();
  *      });
  *
  *      // partial reusability
- *      const useDbInSomeClient = useDatabase(someClient, R.__);
+ *      const useDbInSomeClient = useDb(someClient, R.__);
  *      useDbInSomeClient('someDb').then(someDb => {});
  *      useDbInSomeClient('someOtherDb').then(someOtherDb => {}); *
  */
-const useDatabase = curry((client, databaseName) => {
+const useDb = curry((client, databaseName) => {
   const clientP = cond([
     [isFunction, (fn) => fn()],
     [isPromise, identity],
@@ -47,4 +48,8 @@ const useDatabase = curry((client, databaseName) => {
   return clientP.then((c) => c.db(databaseName));
 });
 
-export default useDatabase;
+export default useDb;
+
+const client = createClient('mongodb://root:rootpassword@localhost:27017');
+const useMainDb = () => useDb(client, 'pho');
+useMainDb().then(console.log)
