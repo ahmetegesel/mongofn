@@ -1,17 +1,17 @@
-# Mongof
+# Mongofn
 
 A practical functional programming library to use some of the key features that [mongodb](https://www.npmjs.com/package/mongodb) 
 provide. 
 
 Focus of the library is definitely not to provide all features that `mongodb` provides.
-Instead, Mongof will provide you the most common functions wrapped with curried functions, 
+Instead, Mongofn will provide you the most common functions wrapped with curried functions, 
 so that you can skip initial setup for `client` and retrieval of `db` and `collection` objects,
 and make them extremely reusable across your entire project.
 
-Note: Mongof is completely dependent on [ramda](https://github.com/ramda/ramda) library to
+Note: Mongofn is completely dependent on [ramda](https://github.com/ramda/ramda) library to
 provide functional programming style for mongodb.
 
-## Why Mongof?
+## Why Mongofn?
 
 It is simple and extremely extensible with the power of functional programming paradigm.
 Since the most of the functions provided are curried functions, 
@@ -51,7 +51,7 @@ To be able to reuse this code snippet you may be storing the client instance
 somewhere and reach it from other place in your project, but it is still done
 imperatively. 
 
-Here is a collection usage in Mongof:
+Here is a collection usage in Mongofn:
 
 ```
 // Connection URL
@@ -74,14 +74,14 @@ you need without any additional setup.
 
 Simply run the following command:
 
-`$ npm install mongof`
+`$ npm install Mongofn`
 
 ## Usage
 
-Mongof essentially provides you some useful functions to connect a MongoDB client,
+Mongofn essentially provides you some useful functions to connect a MongoDB client,
 and perform most used operations on a MongoDB instance including CRUD operations. 
 
-Also, Mongof provides `useDb` and `useCollection` functions
+Also, Mongofn provides `useDb` and `useCollection` functions
 that simply give you original `Db` and `Collection` objects from `mongodb`,
 then you can freely perform all kinds of `mongodb` operations.
 
@@ -91,7 +91,7 @@ Before you can perform operations on a MongoDB instance, first we need to connec
 To connect a MongoDB instance you can use `createClient` function.
 
 ```
-const { createClient } = require('mongof');
+const { createClient } = require('Mongofn');
 
 const connectionString = 'mongodb://root:rootpassword@localhost:27017';
 const options = {
@@ -118,19 +118,19 @@ For more info: see
 [memoizeWith](https://ramdajs.com/docs/#memoizeWith) 
 and [Memoization (1D, 2D and 3D)](https://www.geeksforgeeks.org/memoization-1d-2d-and-3d/)
 
-All other main functions of Mongof requires `client`
+All other main functions of Mongofn requires `client`
 
 ### useDb and useCollection
 
 In `mongodb`, we start with connection client and pass a callback function to perform
 operations over connected `mongodb` instance. It is repeated and very imperative way of
-using mongodb. In Mongof, you can use `useDb` and `useCollection` functions which
+using mongodb. In Mongofn, you can use `useDb` and `useCollection` functions which
 accepts `client` as first argument to use with, to perform all kinds of `Db` and `Collection` 
 in declarative way.
 
 ```
 // useMainDb.js
-const { createClient, useDb } = require('mongof');
+const { createClient, useDb } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -151,7 +151,7 @@ the basic usage of the function.
 
 Let's make an example of fetching all data that a collection contains.
 ```
-const { createClient, useCollection } = require('mongof');
+const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -169,13 +169,13 @@ do anything you want that `mongodb` provides.
 If we want to make it reusable across our entire app we can benefit from
 currying.
 
-As we noted before, most of the functions are curried in Mongof.
+As we noted before, most of the functions are curried in Mongofn.
 
 Let's make an example and compose a function which will help you use collections
 in a db without repeating code for the setup.
 
 ```
-const { createClient, useCollection } = require('mongof');
+const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -190,13 +190,13 @@ useCollectionInMainDb('users').then(console.log);
 
 ### __ object
 
-Before we give you more info about CRUD operations in Mongof, we need to understand
+Before we give you more info about CRUD operations in Mongofn, we need to understand
 one crucial object `__`. It is a special placeholder which you can use in curried functions
 to be able to recompose your function allowing partial application of any combination
  f arguments, regardless of their positions.
  
 ```
-const { createClient, useCollection } = require('mongof');
+const { createClient, useCollection } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -217,7 +217,7 @@ they await more parameters from you to perform certain operations.
 using original `Db` and `Collection` objects in `mongodb` in functional way.
 However, we tend to use `mongodb` for mostly CRUD operations.
 
-Mongof provide following functions for finding operations:
+Mongofn provide following functions for finding operations:
 - `findBy(client, dbName, collectionName, predicate) : Promise<Array>`
     - Accepts predicate object as it is documented at 
     [here](http://mongodb.github.io/node-mongodb-native/3.5/reference/ecmascriptnext/crud/#read-methods)
@@ -239,7 +239,7 @@ Here are some examples of usage.
 
 ```
 // findBy example
-const { createClient, findBy, __ } = require('mongof');
+const { createClient, findBy, __ } = require('Mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
