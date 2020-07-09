@@ -1,6 +1,6 @@
 {
   "name": "mongofn",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
@@ -31,7 +31,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com/ahmetegesel/functional-mongo.git"
+    "url": "git+https://github.com/ahmetegesel/mongofn.git"
   },
   "dependencies": {
     "ramda": "^0.27.0",
