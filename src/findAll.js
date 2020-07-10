@@ -1,5 +1,5 @@
 import findBy from './findBy';
-import repeatPlaceholder from '../lib/repeatPlaceholder';
+import repeatPlaceholder from './internal/repeatPlaceholder';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, then

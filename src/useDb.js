@@ -2,7 +2,7 @@ import {
   cond, curry, identity, T,
 } from 'ramda';
 
-import { isFunction, isPromise, isString } from '../lib/type';
+import { isFunction, isPromise, isString } from './internal/type';
 import createClient from './createClient';
 
 /**

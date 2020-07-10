@@ -3,8 +3,8 @@ import {
 } from 'ramda';
 
 import useCollection from './useCollection';
-import isNilOrEmpty from '../lib/isNilOrEmpty';
-import { docId, withoutId } from '../lib/id';
+import isNilOrEmpty from './internal/isNilOrEmpty';
+import { docId, withoutId } from './internal/id';
 
 /**
  * Handles the result of collection.insertOne in MongoDB Driver in a way that
