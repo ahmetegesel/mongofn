@@ -13,7 +13,7 @@ provide functional programming style for mongodb.
 
 ## Why Mongofn?
 
-It is simple and extremely extensible with the power of functional programming paradigm.
+It is simple and extensible with the power of functional programming paradigm.
 Since the most of the functions provided are curried functions, 
 you can benefit from it by recomposing your implementations with different combinations of
 arguments of functions as much as you need.
@@ -54,19 +54,21 @@ imperatively.
 Here is a collection usage in Mongofn:
 
 ```js
+const { useCollection } = require('mongofn');
+
 // Connection URL
 const connectionString = 'mongodb://localhost:27017';
 
 const useMainDb = useCollection(connectionString, 'mainDb');
 
-const categoriesCol = useMaindDb('collections')
+const categoriesCol = useMainDb('collections')
     .then(collection => collection.find({}).toArray());
 const articlesCol = useMainDb('articles')
     .then(collection => collection.find({}).toArray());
 ```
 
-It is simpler and reusable. When you pass url as first argument to useCollection function,
-it caches the client and reuse it every time you call the function. You can recompose
+It is simpler and reusable. When you pass url as first argument to `useCollection` function,
+it caches the `client` and reuse it every time you call the function. You can recompose
 this kind of functions and export them as util functions from somewhere and use whenever 
 you need without any additional setup.
 
@@ -96,7 +98,7 @@ Before you can perform operations on a MongoDB instance, first we need to connec
 To connect a MongoDB instance you can use `createClient` function.
 
 ```js
-const { createClient } = require('Mongofn');
+const { createClient } = require('mongofn');
 
 const connectionString = 'mongodb://root:rootpassword@localhost:27017';
 const options = {
@@ -104,7 +106,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-// Connecto given MongoDB instance and return a Promise<MongoClient>
+// Connect to given MongoDB instance and return a Promise<MongoClient>
 // which you can do any configuration mongodb provides
 createClient(connectionString, options).then(client => {
   const db = client.db('dbName');
@@ -119,11 +121,10 @@ createClient(connectionString, options).then(client => {
 `createClient` is a memoized function, so it will return the same instance
 if you call it with the same arguments.
 
-For more info: see 
-[memoizeWith](https://ramdajs.com/docs/#memoizeWith) 
+For more info: see [memoizeWith](https://ramdajs.com/docs/#memoizeWith) 
 and [Memoization (1D, 2D and 3D)](https://www.geeksforgeeks.org/memoization-1d-2d-and-3d/)
 
-All other main functions of Mongofn requires `client`
+All other main functions of Mongofn requires `client`.
 
 ### useDb and useCollection
 
@@ -135,7 +136,7 @@ in declarative way.
 
 ```js
 // useMainDb.js
-const { createClient, useDb } = require('Mongofn');
+const { useDb } = require('mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -154,10 +155,10 @@ Functional programming actually starts with `useCollection`.
 However, before we dive into functional programming realm, let's first understand
 the basic usage of the function.
 
-Let's make an example of fetching all data that a collection contains.
+Here is an example of fetching all data that a collection contains.
 
 ```js
-const { createClient, useCollection } = require('Mongofn');
+const { useCollection } = require('mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -181,7 +182,7 @@ Let's make an example and compose a function which will help you use collections
 in a db without repeating code for the setup.
 
 ```js
-const { createClient, useCollection } = require('Mongofn');
+const { useCollection } = require('mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -199,10 +200,10 @@ useCollectionInMainDb('users').then(console.log);
 Before we give you more info about CRUD operations in Mongofn, we need to understand
 one crucial object `__`. It is a special placeholder which you can use in curried functions
 to be able to recompose your function allowing partial application of any combination
- f arguments, regardless of their positions.
+ of arguments, regardless of their positions.
  
 ```js
-const { createClient, useCollection } = require('Mongofn');
+const { useCollection } = require('mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
@@ -213,7 +214,7 @@ useCategoriesIn('otherDb').then(console.log);
 ```
 
 As you may have noticed, after passing `__` object to useCollection as `dbName` argument,
-`useCollection` returns another function which you can pass any 'dbName' you need, so you
+`useCollection` returns another function which you can pass any `dbName` you need, so you
 reuse the rest of the setup of the function. This is useful in mostly CRUD operations since
 they await more parameters from you to perform certain operations.
 
@@ -245,14 +246,14 @@ Here are some examples of usage.
 
 ```js
 // findBy example
-const { createClient, findBy, __ } = require('Mongofn');
+const { createClient, findBy, __ } = require('mongofn');
 
 const connectionString = 'mongodb://localhost:27017';
 
 const findInMaindDbBy = findBy(connectionString, 'mainDb');
 
 findInMaindDbBy('categories', { name: 'some Categery' }).then(console.log);
-findInMaindDbBy('articles', { name: 'some Categery' }).then(console.log);
+findInMaindDbBy('articles', { name: 'some Article' }).then(console.log);
 
 const findInCategoriesBy = findInMaindDbBy('categories');
 findInCategoriesBy({ name: 'some Categery' }).then(console.log);
