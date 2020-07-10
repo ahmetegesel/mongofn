@@ -7,7 +7,7 @@ import { MongoClient } from 'mongodb';
  * @type {object}
  * @constant
  * */
-export const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
