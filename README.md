@@ -153,7 +153,7 @@ findBy(client, 'databaseName', 'collectionName', {name: 'some name'})
 closeClient(connectionString, options);
 ``` 
 
-Since `createClient` is a `memoized` function and `closeClient` calls `createClient`
+Since `createClient` is a `memoized` function, `closeClient` calls `createClient`
 inside to fetch the same `MongoClient` instance using memoization, then closes
 the connection.
 
