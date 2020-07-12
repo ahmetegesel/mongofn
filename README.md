@@ -238,7 +238,11 @@ Mongofn provide following functions for finding operations:
 - `findByObjectId(client, dbName, collectionName, id) : Promise<object>`
     - It's a wrapper function of `findById` to rescue you from repeatedly pass
     your id value in an instance of `ObjectId`.
-    
+
+Note: `find` operations also accept `Array` as the last argument in which
+the first element is the `query param`, and the second element is the
+`options` to be passed to the corresponding `mongodb` operation.
+  
 All the CRUD operations functions are curried, so you can freely use them as we
 used `useDb` and `useCollection` functions.
 
@@ -253,7 +257,12 @@ const connectionString = 'mongodb://localhost:27017';
 const findInMaindDbBy = findBy(connectionString, 'mainDb');
 
 findInMaindDbBy('categories', { name: 'some Categery' }).then(console.log);
-findInMaindDbBy('articles', { name: 'some Article' }).then(console.log);
+// You can pass options as well if you prefer passing an array
+findInMaindDbBy(
+  'articles', [
+    { name: 'some Article' },
+    { projection: { _id: 0, name: 1 }}
+  ]).then(console.log); // projected result
 
 const findInCategoriesBy = findInMaindDbBy('categories');
 findInCategoriesBy({ name: 'some Categery' }).then(console.log);
