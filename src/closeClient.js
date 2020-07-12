@@ -1,9 +1,9 @@
 import createClient from './createClient';
 
 /**
- * Closes given client. Since {@link createClient} is a memoized function,
- * it accepts the same params that {@link createClient} accepts, so that
- * it can get the same client to close it.
+ * Closes client connection. Since {@link createClient} is a memoized function,
+ * it accepts the same arguments that {@link createClient} accepts, so that
+ * it can get the same client to close the connection.
  *
  * @func closeClient
  * @type function
@@ -24,8 +24,7 @@ import createClient from './createClient';
  *
  *      closeClient(connectionString, options);
  */
-const closeClient = (connectionString, options = undefined) =>
-  createClient(connectionString, options)
-    .then(client => client.close);
+const closeClient = (connectionString, options = undefined) => createClient(connectionString, options)
+  .then((client) => client.close());
 
 export default closeClient;

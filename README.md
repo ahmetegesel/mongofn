@@ -126,6 +126,37 @@ and [Memoization (1D, 2D and 3D)](https://www.geeksforgeeks.org/memoization-1d-2
 
 All other main functions of Mongofn requires `client`.
 
+### Closing connection
+It is highly recommended that you should keep your connection open since
+it might spend just a little more time to restart the connection when you
+try to perform an operation on a `MongoClient`. That is why any of provided
+functions of Mongofn does not close the connection after any operation is done.
+However, there might be cases you need to close the client session, e.g. on exiting
+of you app, in that case, you can use `closeConnection` function which accepts
+the same arguments with `createClient`, to close the given connection. If you have
+client instance already, of course you can simply all `client.close()` as well.
+
+Here is the usage of `closeCollection` function:
+
+```js
+const { createClient, closeClient } = require('mongofn');
+ 
+const connectionString = '....';
+const options = {};
+
+const client = createClient(connectionString, options);
+findBy(client, 'databaseName', 'collectionName', {name: 'some name'})
+ .then(console.log);
+
+// Closing the client session giving the same parameters we passed
+// to createClient function above.
+closeClient(connectionString, options);
+``` 
+
+Since `createClient` is a `memoized` function and `closeClient` calls `createClient`
+inside to fetch the same `MongoClient` instance using memoization, then closes
+the connection.
+
 ### useDb and useCollection
 
 In `mongodb`, we start with connection client and pass a callback function to perform
@@ -288,5 +319,4 @@ findInMainDbUsing(client2, 'users', { name: 'some User name' }).then(console.log
 
 - Implement insertOne
 - Implement updateOne
-- Make sure connections are closed after using any of these functions
 - Tests
