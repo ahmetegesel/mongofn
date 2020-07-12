@@ -2,6 +2,7 @@ import { curryN, init, last } from 'ramda';
 
 import { ObjectId } from 'mongodb';
 import findById from './findById';
+import dissolveFindParams from './internal/dissolveFindParams';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and an {@link ObjectId}, then
@@ -19,7 +20,7 @@ import findById from './findById';
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
  * @param {string} collectionName Collection name to get find results from.
- * @param {ObjectId} id Id of the document to be fetched.
+ * @param {FindParams<ObjectId>} id Id of the document to be fetched.
  * @return {Promise<object>} Document with given id.
  * @see {@link findById}, {@link createClient}
  * @example
@@ -39,9 +40,9 @@ import findById from './findById';
 const findByObjectId = curryN(
   findById.length,
   (...args) => {
-    const id = last(args);
+    const [id, ...params] = dissolveFindParams(last(args));
 
-    return findById(...init(args))(new ObjectId(id));
+    return findById(...init(args))([new ObjectId(id), ...params]);
   },
 );
 

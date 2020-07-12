@@ -9,3 +9,4 @@ export const isError = isTypeOf('Error');
 export const isFunction = isTypeOf('Function');
 export const isPromise = isTypeOf('Promise');
 export const isString = isTypeOf('String');
+export const isArray = isTypeOf('Array');

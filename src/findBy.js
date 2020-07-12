@@ -3,6 +3,15 @@ import {
 } from 'ramda';
 
 import useCollection from './useCollection';
+import dissolveFindParams from './internal/dissolveFindParams';
+
+/**
+ * It can be either direct `query param` as it is expected in corresponding `mongodb` operation,
+ * or it can be an `Array` in which the first element is the `query param` and the second element is the `options`
+ * to be passed to the corresponding `mongodb` operation.
+ *
+ * @typedef { T | Array<T> } FindParams<T>
+ * */
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and a predicate, then
@@ -20,7 +29,7 @@ import useCollection from './useCollection';
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
  * @param {string} collectionName Collection name to get find results from.
- * @param {object} predicate An object that represents the query.
+ * @param {FindParams<object>} predicate An object that represents the query.
  * @return {Promise<Array>} Array of Document matching given predicate.
  * @see {@link findAll}, {@link createClient}
  * @example
@@ -46,7 +55,7 @@ const findBy = uncurryN(
     useCollection,
     uncurryN(
       2,
-      (collectionPromise) => (predicate) => andThen((collection) => collection.find(predicate).toArray(), collectionPromise),
+      (collectionPromise) => (predicate) => andThen((collection) => collection.find(...dissolveFindParams(predicate)).toArray(), collectionPromise),
     ),
   ),
 );

@@ -3,6 +3,7 @@ import {
 } from 'ramda';
 
 import useCollection from './useCollection';
+import dissolveFindParams from './internal/dissolveFindParams';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and an id, then
@@ -20,7 +21,7 @@ import useCollection from './useCollection';
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
  * @param {string} collectionName Collection name to get find results from.
- * @param {any} id Id of the document to be fetched.
+ * @param {FindParams<any>} id Id of the document to be fetched.
  * @return {Promise<object>} Document with given id.
  * @see {@link findByObjectId}, {@link createClient}
  * @example
@@ -43,7 +44,10 @@ const findById = uncurryN(
     useCollection,
     uncurryN(
       2,
-      (collectionPromise) => (id) => andThen((collection) => collection.findOne({ _id: id }), collectionPromise),
+      (collectionPromise) => (idLike) => andThen((collection) => {
+        const [id, ...params] = dissolveFindParams(idLike);
+        return collection.findOne({ _id: id }, ...params);
+      }, collectionPromise),
     ),
   ),
 );
