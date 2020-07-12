@@ -1,6 +1,5 @@
 import findBy from './findBy';
 import repeatPlaceholder from './internal/repeatPlaceholder';
-import findByObjectId from './findByObjectId';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, then
@@ -35,10 +34,3 @@ import findByObjectId from './findByObjectId';
 const findAll = findBy(...repeatPlaceholder(findBy.length), {});
 
 export default findAll;
-
-findByObjectId('mongodb://root:rootpassword@localhost:27017', 'pho', 'users', ['5efe5a9fbcf2ff75ac160aa0', {
-  projection: {
-    _id: 0,
-    name: 1,
-  },
-}]).then(console.log);

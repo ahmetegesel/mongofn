@@ -1,6 +1,6 @@
 {
   "name": "mongofn",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
@@ -9,7 +9,8 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel ./src --out-dir ./dist",
     "build": "npm run build:es && npm run build:cjs",
     "precommit": "npm run lint",
-    "prepublishOnly": "npm run precommit && npm run clean && npm run build"
+    "prepublishOnly": "npm run precommit && npm run clean && npm run build",
+    "postpublish": "npm run clean"
   },
   "main": "./dist/index.js",
   "module": "./es/index.js",
