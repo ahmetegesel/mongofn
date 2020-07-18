@@ -317,6 +317,7 @@ findInMainDbUsing(client2, 'users', { name: 'some User name' }).then(console.log
 
 ## TODO
 
+- Discard memoization from `createClient` and introduce `useMemoClient` instead. 
 - Implement insertOne
 - Implement updateOne
 - Tests
