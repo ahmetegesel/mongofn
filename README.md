@@ -321,3 +321,4 @@ findInMainDbUsing(client2, 'users', { name: 'some User name' }).then(console.log
 - Implement insertOne
 - Implement updateOne
 - Tests
+- Error handling for passing non objectId parameter to findByObjectId
