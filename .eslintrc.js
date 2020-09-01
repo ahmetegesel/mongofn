@@ -1,15 +1,19 @@
 module.exports = {
+  extends: ['airbnb-base'],
+  plugins: ['import', 'node'],
+  rules: {
+    'max-len': ['error', 150, 2],
+  },
   parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
   },
-  env: {
-    node: true,
-    es6: true,
-  },
-  extends: ['airbnb-base'],
-  plugins: ['import', 'node'],
-  rules: {
-    'max-len': ['error', 150],
+  globals: {
+    describe: false,
+    test: false,
+    expect: false,
+    jest: false,
+    beforeEach: false,
+    it: false,
   },
 };

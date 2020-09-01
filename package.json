@@ -6,11 +6,12 @@
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
     "clean": "rimraf es/* dist/*",
     "build:es": "cross-env BABEL_ENV=es babel ./src --out-dir ./es",
-    "build:cjs": "cross-env BABEL_ENV=cjs babel ./src --out-dir ./dist",
+    "build:cjs": "babel ./src --out-dir ./dist",
     "build": "npm run build:es && npm run build:cjs",
     "precommit": "npm run lint",
     "prepublishOnly": "npm run precommit && npm run clean && npm run build",
-    "postpublish": "npm run clean"
+    "postpublish": "npm run clean",
+    "test": "jest"
   },
   "main": "./dist/index.js",
   "module": "./es/index.js",
@@ -41,7 +42,10 @@
     "babel-eslint": "^10.1.0",
     "@types/ramda": "^0.27.6",
     "rimraf": "^3.0.2",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "jest": "^26.4.2",
+    "babel-jest": "^26.3.0",
+    "@types/jest": "^26.0.12"
   },
   "keywords": [
     "mongofn",
