@@ -15,9 +15,10 @@ describe('client tests', () => {
     jest.clearAllMocks();
   });
 
-  describe('createClient tests', () => {
-    const sampleClient = {};
+  const sampleClient = {};
+  MongoClient.connect.mockResolvedValue(sampleClient);
 
+  describe('createClient tests', () => {
     it('should return a client instance using MongoClient.connect', async () => {
       expect.assertions(3);
 
@@ -56,14 +57,15 @@ describe('client tests', () => {
 
   describe('useMemoizedClient tests', () => {
     it('should be memoized', async () => {
-      expect.assertions(1);
+      expect.assertions(2);
 
       const connectionString = 'connectionString';
       const options = {};
 
-      await useMemoizedClient(connectionString, options);
-      await useMemoizedClient(connectionString, options);
+      const client1 = await useMemoizedClient(connectionString, options);
+      const client2 = await useMemoizedClient(connectionString, options);
 
+      expect(client1).toBe(client2);
       expect(MongoClient.connect).toBeCalledTimes(1);
     });
   });
