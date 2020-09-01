@@ -32,7 +32,7 @@ import useDb from './useDb';
  *        return collection.find({}).toArray();
  *      });
  *
- *      // partial reusability
+ *      // partial re-usability
  *      const useCollectionInSomeDb = useCollection(someClient, 'someDb');
  *      useCollectionInSomeDb('someCollection').then(collection => {});
  *      useCollectionInSomeDb('someOtherCollection').then(collection => {});

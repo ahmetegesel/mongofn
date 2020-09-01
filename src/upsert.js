@@ -15,7 +15,7 @@ import { docId, withoutId } from './internal/id';
  * @param {object} cursorResult Cursor result of insertOne function.
  * @return {object} Inserted document.
  * */
-export const handleInsertOneResult = pipe(prop('ops'), head);
+const handleInsertOneResult = pipe(prop('ops'), head);
 
 /**
  * Handles the result of collection.findOneAndUpdate in MongoDB Driver in a way that
@@ -26,7 +26,7 @@ export const handleInsertOneResult = pipe(prop('ops'), head);
  * @param {object} cursorResult Cursor result of findOneAndUpdate function.
  * @return {object} Updated document.
  * */
-export const handleFindOneAndUpdateResult = prop('value');
+const handleFindOneAndUpdateResult = prop('value');
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and a doc to be upserted,

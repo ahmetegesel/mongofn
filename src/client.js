@@ -7,7 +7,7 @@ import { MongoClient } from 'mongodb';
  * @type {object}
  * @constant
  * */
-const DEFAULT_OPTIONS = {
+export const DEFAULT_OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
@@ -52,7 +52,7 @@ const DEFAULT_OPTIONS = {
  */
 export const createClient = (
   connectionString,
-  options = DEFAULT_OPTIONS
+  options = DEFAULT_OPTIONS,
 ) => MongoClient.connect(connectionString, options);
 
 /**
@@ -60,7 +60,8 @@ export const createClient = (
  * then returns a memoized {@link MongoClient} object which can be used to perform all kind of Client
  * operations that MongoDB Node.js Driver provides and it's initialized only once since it is memoized.
  *
- * `connectionString` value should be as documented at [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
+ * `connectionString` value should be as documented at
+ * [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
  *
  * `options` value should be as documented at
  * [Official Manual](http://mongodb.github.io/node-mongodb-native/3.5/reference/connecting/connection-settings/).

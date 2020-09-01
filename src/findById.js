@@ -32,8 +32,8 @@ import dissolveFindParams from './internal/dissolveFindParams';
  *      findBy(client, 'databaseName', 'collectionName', someId)
  *      .then(console.log);
  *
- *      // partial reusability
- *      const findInSomeDbById = findById(someCliemt, 'someDb');
+ *      // partial re-usability
+ *      const findInSomeDbById = findById(someClient, 'someDb');
  *      findCategoriesBy('categories', someId).then(category => {});
  *      findCategoriesBy('articles', someOtherId).then(article => {});
  *
@@ -45,8 +45,8 @@ const findById = uncurryN(
     uncurryN(
       2,
       (collectionPromise) => (idLike) => andThen((collection) => {
-        const [id, ...params] = dissolveFindParams(idLike);
-        return collection.findOne({ _id: id }, ...params);
+        const [id, ...otherParams] = dissolveFindParams(idLike);
+        return collection.findOne({ _id: id }, ...otherParams);
       }, collectionPromise),
     ),
   ),

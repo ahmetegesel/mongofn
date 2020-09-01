@@ -6,8 +6,8 @@ import useCollection from './useCollection';
 import dissolveFindParams from './internal/dissolveFindParams';
 
 /**
- * It can be either direct `query param` as it is expected in corresponding `mongodb` operation,
- * or it can be an `Array` in which the first element is the `query param` and the second element is the `options`
+ * It can be either direct `predicate` as it is expected in corresponding `mongodb` operation,
+ * or it can be an `Array` in which the first element is the `predicate` and the second element is the `options`
  * to be passed to the corresponding `mongodb` operation.
  *
  * @typedef { T | Array<T> } FindParams<T>
@@ -18,7 +18,8 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * returns `Promise` which resolves an `Array` of result that matches given predicate in specified `Collection`
  * in MongoDB.
  *
- * `predicate` should be as documented at [here](http://mongodb.github.io/node-mongodb-native/3.5/reference/ecmascriptnext/crud/#read-methods)
+ * `predicate` should be as documented at
+ * [here](http://mongodb.github.io/node-mongodb-native/3.5/reference/ecmascriptnext/crud/#read-methods)
  *
  * It is a curried function so it can be partially recomposed.
  * Since [Ramda](https://ramdajs.com/) is used for currying, you can also use [R.__](https://ramdajs.com/docs/#__)
@@ -55,7 +56,10 @@ const findBy = uncurryN(
     useCollection,
     uncurryN(
       2,
-      (collectionPromise) => (predicate) => andThen((collection) => collection.find(...dissolveFindParams(predicate)).toArray(), collectionPromise),
+      (collectionPromise) => (predicate) => andThen(
+        (collection) => collection.find(...dissolveFindParams(predicate)).toArray(),
+        collectionPromise,
+      ),
     ),
   ),
 );

@@ -31,8 +31,8 @@ import dissolveFindParams from './internal/dissolveFindParams';
  *      findBy(client, 'databaseName', 'collectionName', new ObjectId(someId))
  *      .then(console.log);
  *
- *      // partial reusability
- *      const findInSomeDbById = findById(someCliemt, 'someDb');
+ *      // partial re-usability
+ *      const findInSomeDbById = findById(someClient, 'someDb');
  *      findCategoriesBy('categories', someObjectId).then(category => {});
  *      findCategoriesBy('articles', someOtherObjectId).then(article => {});
  *

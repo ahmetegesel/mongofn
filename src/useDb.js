@@ -3,7 +3,7 @@ import {
 } from 'ramda';
 
 import { isFunction, isPromise, isString } from './internal/type';
-import { createClient } from './createClient';
+import { createClient } from './client';
 
 /**
  * Takes a {@link MongoClientLike} and a database name, then returns `Promise` which resolves

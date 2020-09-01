@@ -25,8 +25,8 @@ import repeatPlaceholder from './internal/repeatPlaceholder';
  *      findBy(client, 'databaseName', 'collectionName')
  *      .then(console.log);
  *
- *      // partial reusability
- *      const findAllOf = findBy(someCliemt, 'someDb');
+ *      // partial re-usability
+ *      const findAllOf = findBy(someClient, 'someDb');
  *      findAllOf('categories').then(categories => {});
  *      findAllOf('articles').then(articles => {});
  *
