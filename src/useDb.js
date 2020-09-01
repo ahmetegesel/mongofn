@@ -3,7 +3,7 @@ import {
 } from 'ramda';
 
 import { isFunction, isPromise, isString } from './internal/type';
-import createClient from './createClient';
+import { createClient } from './createClient';
 
 /**
  * Takes a {@link MongoClientLike} and a database name, then returns `Promise` which resolves
@@ -33,20 +33,20 @@ import createClient from './createClient';
  *        return collection.find({}).toArray();
  *      });
  *
- *      // partial reusability
+ *      // partial re-usability
  *      const useDbInSomeClient = useDb(someClient, R.__);
  *      useDbInSomeClient('someDb').then(someDb => {});
  *      useDbInSomeClient('someOtherDb').then(someOtherDb => {}); *
  */
 const useDb = curry((client, databaseName) => {
-  const clientP = cond([
+  const clientPromise = cond([
     [isString, createClient],
     [isFunction, (fn) => fn()],
     [isPromise, identity],
     [T, (obj) => Promise.resolve(obj)],
   ])(client);
 
-  return clientP.then((c) => c.db(databaseName));
+  return clientPromise.then((c) => c.db(databaseName));
 });
 
 export default useDb;

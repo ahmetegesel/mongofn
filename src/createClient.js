@@ -30,9 +30,6 @@ const DEFAULT_OPTIONS = {
  * `options` value should be as documented at
  * [Official Manual](http://mongodb.github.io/node-mongodb-native/3.5/reference/connecting/connection-settings/).
  *
- * Note that the client instance is cached by memoization of this function using
- * [memoizeWith](https://ramdajs.com/docs/#memoizeWith).
- *
  * @func createClient
  * @type function
  * @since v0.1.0
@@ -43,7 +40,7 @@ const DEFAULT_OPTIONS = {
  *
  * createClient(
  'mongodb://username:password@localhost:27017',
-  {
+ {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
@@ -53,6 +50,44 @@ const DEFAULT_OPTIONS = {
  )
  *
  */
-const createClient = memoizeWith(identity, ((connectionString, options = DEFAULT_OPTIONS) => MongoClient.connect(connectionString, options)));
+export const createClient = (
+  connectionString,
+  options = DEFAULT_OPTIONS
+) => MongoClient.connect(connectionString, options);
 
-export default createClient;
+/**
+ * Connects to a MongoDB Client using given `connectionString` and `options`,
+ * then returns a memoized {@link MongoClient} object which can be used to perform all kind of Client
+ * operations that MongoDB Node.js Driver provides and it's initialized only once since it is memoized.
+ *
+ * `connectionString` value should be as documented at [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
+ *
+ * `options` value should be as documented at
+ * [Official Manual](http://mongodb.github.io/node-mongodb-native/3.5/reference/connecting/connection-settings/).
+ *
+ * @func createClient
+ * @type function
+ * @since v0.1.0
+ * @param {string} connectionString Connection String.
+ * @param {object} options Optional MongoDB Client settings.
+ * @return {Promise} An Instance of MongoDB Client.
+ * @example
+ *
+ * const useMainClient = useMemoizedClient(
+ 'mongodb://username:password@localhost:27017',
+ {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+ );
+
+ // below fns use the same instance of client all the time.
+ // client is instantiated only once.
+ const useDbInMainClient = useDb(useMainClient);
+ useDbInMainClient('someDb').then(console.log);
+ useDbInMainClient('someOtherDb').then(console.log);
+
+ // say we want to close this client
+ useMainClient().then(client => client.close());
+ * */
+export const useMemoizedClient = memoizeWith(identity, createClient);
