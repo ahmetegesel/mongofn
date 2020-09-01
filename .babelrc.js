@@ -17,12 +17,10 @@ module.exports = {
         '@babel/plugin-proposal-throw-expressions',
       ]
     },
-    cjs: {
-      presets: ['@babel/preset-env'],
-      plugins: [
-        '@babel/plugin-proposal-export-default-from',
-        '@babel/plugin-proposal-throw-expressions',
-      ]
-    }
-  }
+  },
+  presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3 }]],
+  plugins: [
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-proposal-throw-expressions',
+  ]
 }
