@@ -1,6 +1,5 @@
 import useDb from '../src/useDb';
 import { createClient } from '../src/client';
-import { isFunction } from '../src/internal/type';
 
 jest.mock('../src/client');
 
