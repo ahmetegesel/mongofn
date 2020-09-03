@@ -25,16 +25,14 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * @see {@link findById}, {@link createClient}
  * @example
  *
- *      // complete usage
- *      // See createClient docs for more information
  *      const client = createClient(...params);
- *      findBy(client, 'databaseName', 'collectionName', new ObjectId(someId))
+ *      findByObjectId(client, 'databaseName', 'collectionName', new ObjectId(someId))
  *      .then(console.log);
  *
  *      // partial re-usability
- *      const findInSomeDbById = findById(someClient, 'someDb');
- *      findCategoriesBy('categories', someObjectId).then(category => {});
- *      findCategoriesBy('articles', someOtherObjectId).then(article => {});
+ *      const findInSomeDbByObjectId = findByObjectId(someClient, 'someDb');
+ *      findInSomeDbByObjectId('categories', someObjectId).then(console.log);
+ *      findInSomeDbByObjectId('articles', someOtherObjectId).then(console.log);
  *
  */
 const findByObjectId = curryN(

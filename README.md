@@ -72,6 +72,15 @@ it caches the `client` and reuse it every time you call the function. You can re
 this kind of functions and export them as util functions from somewhere and use whenever 
 you need without any additional setup.
 
+## TODO
+
+- Implement findAndModify
+- Implement insertOne
+- Implement updateOne
+- Tests
+- Eventually, remove `ramda` dependency from the package
+
+
 ## Installation
 
 
@@ -282,9 +291,3 @@ findInMainDbUsing(client2, 'users', { name: 'some User name' }).then(console.log
 
 // You can think of all combinations you need. 
 ```
-
-## TODO
-
-- Implement insertOne
-- Implement updateOne
-- Tests

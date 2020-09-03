@@ -21,9 +21,8 @@ export const DEFAULT_OPTIONS = {
  * */
 
 /**
- * Connects to a MongoDB Client using given `connectionString` and `options`,
- * then returns {@link MongoClient} object which can be used to perform all kind of Client
- * operations that MongoDB Node.js Driver provides.
+ * Connects to a MongoDB instance using given `connectionString` and `options`,
+ * then returns {@link MongoClient} object.
  *
  * `connectionString` value should be as documented at [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
  *
@@ -56,9 +55,8 @@ export const createClient = (
 ) => MongoClient.connect(connectionString, options);
 
 /**
- * Connects to a MongoDB Client using given `connectionString` and `options`,
- * then returns a memoized {@link MongoClient} object which can be used to perform all kind of Client
- * operations that MongoDB Node.js Driver provides and it's initialized only once since it is memoized.
+ * Connects to a MongoDB instance using given `connectionString` and `options`,
+ * then returns a `memoized` {@link MongoClient} object.
  *
  * `connectionString` value should be as documented at
  * [Official Manual](docs.mongodb.org/manual/reference/connection-string/).
@@ -68,7 +66,7 @@ export const createClient = (
  *
  * @func createClient
  * @type function
- * @since v0.1.0
+ * @since v0.6.0
  * @param {string} connectionString Connection String.
  * @param {object} options Optional MongoDB Client settings.
  * @return {Promise} An Instance of MongoDB Client.
@@ -82,7 +80,7 @@ export const createClient = (
   }
  );
 
- // below fns use the same instance of client all the time.
+ // fns given below use the same instance of client all the time.
  // client is instantiated only once.
  const useDbInMainClient = useDb(useMainClient);
  useDbInMainClient('someDb').then(console.log);

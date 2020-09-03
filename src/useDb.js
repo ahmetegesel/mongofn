@@ -10,7 +10,7 @@ import { createClient } from './client';
  * [MongoDB Db Object](http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html).
  *
  * It returns the original MongoDB {@link Db} object so it can be used to perform
- * all kind of Db operations that MongoDB Node.js Driver provides.
+ * all Db operations that MongoDB provides.
  *
  * It is a curried function so it can be partially recomposed.
  * Since [Ramda](https://ramdajs.com/) is used for currying, you can also use [R.__](https://ramdajs.com/docs/#__)

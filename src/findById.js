@@ -7,10 +7,10 @@ import dissolveFindParams from './internal/dissolveFindParams';
 
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and an id, then
- * returns `Promise` which resolves the (Document)[https://docs.mongodb.com/manual/core/document/] with given id in specified `Collection`
- * in MongoDB.
+ * returns a `Promise` which resolves the (Document)[https://docs.mongodb.com/manual/core/document/]
+ * with given id in specified `Collection`
  *
- * `id` anything that MongoDB Driver accepts
+ * `id` can be anything that MongoDB Driver accepts
  *
  * It is a curried function so it can be partially recomposed.
  * Since [Ramda](https://ramdajs.com/) is used for currying, you can also use [R.__](https://ramdajs.com/docs/#__)
@@ -29,13 +29,13 @@ import dissolveFindParams from './internal/dissolveFindParams';
  *      // complete usage
  *      // See createClient docs for more information
  *      const client = createClient(...params);
- *      findBy(client, 'databaseName', 'collectionName', someId)
+ *      findById(client, 'databaseName', 'collectionName', someId)
  *      .then(console.log);
  *
  *      // partial re-usability
  *      const findInSomeDbById = findById(someClient, 'someDb');
- *      findCategoriesBy('categories', someId).then(category => {});
- *      findCategoriesBy('articles', someOtherId).then(article => {});
+ *      findCategoriesBy('categories', someId).then(console.log);
+ *      findCategoriesBy('articles', someOtherId).then(console.log);
  *
  */
 const findById = uncurryN(

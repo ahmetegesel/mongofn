@@ -14,21 +14,19 @@ import repeatPlaceholder from './internal/repeatPlaceholder';
  * @since v0.1.0
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
- * @param {string} collectionName Collection name to get find results from.
- * @return {Promise<Array>} Array of Document matching given predicate.
+ * @param {string} collectionName Collection name to get find results in.
+ * @return {Promise<Array>} Array of Documents matching given predicate.
  * @see {@link findBy}, {@link createClient}
  * @example
  *
- *      // complete usage
- *      // See createClient docs for more information
  *      const client = createClient(...params);
- *      findBy(client, 'databaseName', 'collectionName')
+ *      findAll(client, 'databaseName', 'collectionName')
  *      .then(console.log);
  *
  *      // partial re-usability
- *      const findAllOf = findBy(someClient, 'someDb');
- *      findAllOf('categories').then(categories => {});
- *      findAllOf('articles').then(articles => {});
+ *      const findAllIn = findAll(someClient, 'someDb');
+ *      findAllIn('categories').then(console.log);
+ *      findAllIn('articles').then(console.log);
  *
  */
 const findAll = findBy(...repeatPlaceholder(findBy.length), {});

@@ -29,26 +29,24 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * @since v0.1.0
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
- * @param {string} collectionName Collection name to get find results from.
- * @param {FindParams<object>} predicate An object that represents the query.
+ * @param {string} collectionName Collection name to get find results in.
+ * @param {FindParams<object>} predicate FindParams object that represents the query.
  * @return {Promise<Array>} Array of Document matching given predicate.
  * @see {@link findAll}, {@link createClient}
  * @example
  *
- *      // complete usage
- *      // See createClient docs for more information
  *      const client = createClient(...params);
- *      findBy(client, 'databaseName', 'collectionName', {name: 'some name'})
- *      .then(console.log);
+ *      findBy(client, 'databaseName', 'collectionName', { name: 'some name' })
+ *        .then(console.log);
  *
- *      // partial reusability
- *      const findCategoriesBy = findBy(someCliemt, 'someDb', 'categories');
- *      findCategoriesBy({name: 'some name'}).then(result => {});
- *      findCategoriesBy({approved: false}).then(result => {});
+ *      // partial re-usability
+ *      const findCategoriesBy = findBy(someClient, 'someDb', 'categories');
+ *      findCategoriesBy({ name: 'some name' }).then(console.log);
+ *      findCategoriesBy({ approved: false }).then(console.log);
  *
- *      const findApproved = findBy(someCliemt, 'someDb', R.__, {approved: true})
- *      findApproved('categories').then(categories => {});
- *      findApproved('articles').then(articles => {});
+ *      const findApproved = findBy(someClient, 'someDb', R.__, {approved: true})
+ *      findApproved('categories').then(console.log);
+ *      findApproved('articles').then(console.log);
  */
 const findBy = uncurryN(
   inc(useCollection.length),
