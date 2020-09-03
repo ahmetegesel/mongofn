@@ -1,14 +1,14 @@
 # Mongofn
 
-A practical functional programming library to use some of the key features that [mongodb](https://www.npmjs.com/package/mongodb) 
-provide. 
+A practical functional programming library to use [mongodb](https://www.npmjs.com/package/mongodb) 
+in declarative way. 
 
 Focus of the library is definitely not to provide all features that `mongodb` provides.
 Instead, Mongofn will provide you the most common functions wrapped with curried functions, 
 so that you can skip initial setup for `client` and retrieval of `db` and `collection` objects,
 and make them extremely reusable across your entire project.
 
-Note: Mongofn is completely dependent on [ramda](https://github.com/ramda/ramda) library to
+Note: Mongofn is completely **dependent** on [ramda](https://github.com/ramda/ramda) library to
 provide functional programming style for mongodb.
 
 ## Why Mongofn?
@@ -49,9 +49,9 @@ client.connect(function(err) {
 
 To be able to reuse this code snippet you may be storing the client instance
 somewhere and reach it from other place in your project, but it is still done
-imperatively. 
+imperatively. Plus, you might have to implement your own reusable functions.
 
-Here is a collection usage in Mongofn:
+Mongofn provides this re-usability out of the box. Here is a collection usage in Mongofn:
 
 ```js
 const { useCollection } = require('mongofn');
@@ -65,12 +65,22 @@ const categoriesCol = useMainDb('collections')
     .then(collection => collection.find({}).toArray());
 const articlesCol = useMainDb('articles')
     .then(collection => collection.find({}).toArray());
+
+// or you can go little further
+const connectionString = 'mongodb://localhost:27017';
+
+const findInMaindDbBy = findBy(connectionString, 'mainDb');
+const findInCategoriesBy = findInMaindDbBy('categories');
+findInCategoriesBy({ name: 'some Categery' }).then(console.log);
+findInCategoriesBy({ description: 'some Categery description' }).then(console.log);
 ```
 
-It is simpler and reusable. When you pass url as first argument to `useCollection` function,
-it caches the `client` and reuse it every time you call the function. You can recompose
-this kind of functions and export them as util functions from somewhere and use whenever 
-you need without any additional setup.
+It is simpler and reusable. When you pass url as first argument to `useCollection` or any other functions,
+and if you don't provide all parameters, it keeps the given connection options in its scope,
+once you provided all parameters, then it finally sends your request by first connecting to 
+the MongoDB instance and finalize your actual operation on that MongoDB instance.
+
+This particular approach applies to all other curried functions within Mongofn.
 
 ## TODO
 
@@ -99,9 +109,64 @@ and perform most used operations on a MongoDB instance including CRUD operations
 
 Also, Mongofn provides `useDb` and `useCollection` functions
 that simply give you original `Db` and `Collection` objects from `mongodb`,
-then you can freely perform all kinds of `mongodb` operations.
+then you can freely perform all `mongodb` operations.
 
-### Connecting a MongoDB instance
+All functions are curried functions. So, you can reap the benefit of it and construct
+your own CRUD operations functions by partially implementing Mongofn functions and re-use
+them in the entire app.
+
+Here is an example of writing a set of baseRepository functions which you can the re-use them
+in other parts of your app, for example in a categoriesRepository as it's shown below:
+
+```js
+// baseRepository.js
+import {
+  useDb,
+  useCollection,
+  findBy,
+  findAll,
+  findById,
+  findByObjectId,
+  upsert,
+} from 'mongofn';
+import {
+  pipe, reduce, split, tail, toUpper, toLower, head, replace,
+} from 'ramda';
+
+const connectionString = process.env.MONGO_URI;
+const databaseName = process.env.MAIN_DB;
+
+export const useDbInMainDb = () => useDb(connectionString, databaseName);
+export const useCollectionInMainDb = useCollection(connectionString, databaseName);
+export const findInMainDbBy = findBy(connectionString, databaseName);
+export const findAllInMainDb = findAll(connectionString, databaseName);
+export const findInMainDbById = findById(connectionString, databaseName);
+export const findInMainDbByObjectId = findByObjectId(connectionString, databaseName);
+export const upsertInMainDb = upsert(connectionString, databaseName);
+
+
+// categoriesRepository.js
+import { toDoc, toModel } from 'mongofn';
+
+import processPredicate from './helpers/processPredicate';
+
+const collectionName = 'categories';
+
+export const allCategories = () => findAllInMainDb(collectionName).then(toModel);
+export const categoriesBy = (predicate) => {
+  const processedPredicate = processPredicate(predicate);
+  return findInMainDbBy(collectionName, processedPredicate).then(toModel)
+};
+export const categoriesById = (id) => findInMainDbById(collectionName, id).then(toModel);
+export const saveCategory = (contentType) => upsertInMainDb(collectionName, toDoc(contentType)).then(toModel);
+``` 
+
+With this approach, you now are able to require and use only the features/functions
+you need in your particular repository implementations.
+
+## API
+
+### createClient
 
 Before you can perform operations on a MongoDB instance, first we need to connect to it.
 To connect a MongoDB instance you can use `createClient` function.
@@ -156,12 +221,6 @@ const { useMainDb } = require('./useMainDb');
 useMainDb().then(console.log); // Original Db object of mongodb
 
 ```
-
-Ok, I can hear you saying "Where is the functional programming?". 
-
-Functional programming actually starts with `useCollection`. 
-However, before we dive into functional programming realm, let's first understand
-the basic usage of the function.
 
 Here is an example of fetching all data that a collection contains.
 
@@ -239,7 +298,7 @@ Mongofn provide following functions for finding operations:
     and returns a `Promise<Array>`.
 - `findAll(client, dbName, collectionName) : Promise<Array>`
     - Does not need any additional specific argument. 
-    It simply returns all data in given collection as `Promise<Array>`
+    It simply returns all data in given collection as: `Promise<Array>`
 - `findById(client, dbName, collectionName, id) : Promise<object>`
     - Accepts `id` value to look for the `Document` with given `id` in given
     collection, and return `Promise<object>`.
@@ -248,7 +307,7 @@ Mongofn provide following functions for finding operations:
     your id value in an instance of `ObjectId`.
 
 Note: `find` operations also accept `Array` as the last argument in which
-the first element is the `query param`, and the second element is the
+the first element is the `predicate`, and the second element is the
 `options` to be passed to the corresponding `mongodb` operation.
   
 All the CRUD operations functions are curried, so you can freely use them as we
