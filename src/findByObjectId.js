@@ -1,4 +1,6 @@
-import { curryN, init, last } from 'ramda';
+import {
+  curryN, init, last, pick,
+} from 'ramda';
 
 import { ObjectId } from 'mongodb';
 import findById from './findById';
@@ -25,8 +27,9 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * @see {@link findById}, {@link createClient}
  * @example
  *
+ *      const someObjectId = '5f6f22155561340574f03a86';
  *      const client = createClient(...params);
- *      findByObjectId(client, 'databaseName', 'collectionName', new ObjectId(someId))
+ *      findByObjectId(client, 'databaseName', 'collectionName', someObjectId)
  *      .then(console.log);
  *
  *      // partial re-usability
@@ -38,9 +41,11 @@ import dissolveFindParams from './internal/dissolveFindParams';
 const findByObjectId = curryN(
   findById.length,
   (...args) => {
-    const [id, ...params] = dissolveFindParams(last(args));
+    const {
+      query: id, ...options
+    } = dissolveFindParams(last(args));
 
-    return findById(...init(args))([new ObjectId(id), ...params]);
+    return findById(...init(args))([new ObjectId(id), pick(['projection'], options)]);
   },
 );
 

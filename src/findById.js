@@ -1,5 +1,5 @@
 import {
-  andThen, inc, pipe, uncurryN,
+  andThen, inc, pick, pipe, uncurryN,
 } from 'ramda';
 
 import useCollection from './useCollection';
@@ -45,8 +45,10 @@ const findById = uncurryN(
     uncurryN(
       2,
       (collectionPromise) => (idLike) => andThen((collection) => {
-        const [id, ...otherParams] = dissolveFindParams(idLike);
-        return collection.findOne({ _id: id }, ...otherParams);
+        const {
+          query, ...options
+        } = dissolveFindParams(idLike);
+        return collection.findOne({ _id: query }, pick(['projection'], options));
       }, collectionPromise),
     ),
   ),

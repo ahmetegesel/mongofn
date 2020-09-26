@@ -5,6 +5,12 @@ import { ObjectId } from 'mongodb';
 
 export const docId = prop('_id');
 export const modelId = prop('id');
-export const castDocId = when(ObjectId.isValid, (id) => new ObjectId(id));
+export const castDocId = (id) => {
+  if (typeof id === 'number') {
+    return id;
+  }
+
+  return when(ObjectId.isValid, ObjectId)(id);
+};
 export const withoutId = omit(['_id']);
 export const removeUndefinedId = when(pipe(docId, isNil), omit(['_id']));

@@ -22,6 +22,7 @@ describe('findBy tests', () => {
 
   it('should find the data in the collection by given predicate', async () => {
     const predicate = {};
+    const emptyOptions = {};
 
     const expectedResult = ['test'];
     toArray.mockReturnValue(expectedResult);
@@ -29,7 +30,7 @@ describe('findBy tests', () => {
     const result = await findBy(connectionString, dbName, collectionName, predicate);
 
     expect(result).toBe(expectedResult);
-    expect(sampleCollection.find).toBeCalledWith(predicate);
+    expect(sampleCollection.find).toBeCalledWith(predicate, emptyOptions);
   });
 
   it('should also pass options parameter to collection.find when it is given in predicate parameter', async () => {

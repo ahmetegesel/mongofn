@@ -1,5 +1,5 @@
 import {
-  andThen, inc, pipe, uncurryN,
+  andThen, identity, ifElse, inc, isNil, pipe, uncurryN,
 } from 'ramda';
 
 import useCollection from './useCollection';
@@ -47,6 +47,11 @@ import dissolveFindParams from './internal/dissolveFindParams';
  *      const findApproved = findBy(someClient, 'someDb', R.__, {approved: true})
  *      findApproved('categories').then(console.log);
  *      findApproved('articles').then(console.log);
+ *
+ *      // with additional options
+ *      findCategoriesBy([{ approved: true }, {
+ *        skip: 1, limit: 2, projection: { _id: 0 }, sort: { name: 1 }, includeCount: true,
+ *      }]).then(console.log);
  */
 const findBy = uncurryN(
   inc(useCollection.length),
@@ -55,7 +60,31 @@ const findBy = uncurryN(
     uncurryN(
       2,
       (collectionPromise) => (predicate) => andThen(
-        (collection) => collection.find(...dissolveFindParams(predicate)).toArray(),
+        async (collection) => {
+          const {
+            query, skip, limit, sort, includeCount, ...options
+          } = dissolveFindParams(predicate);
+          const cursorResult = collection.find(query, options);
+
+          const result = pipe(
+            ifElse(() => isNil(skip), identity, (cursor) => cursor.skip(skip)),
+            ifElse(() => isNil(limit), identity, (cursor) => cursor.limit(limit)),
+            ifElse(() => isNil(sort), identity, (cursor) => cursor.sort(sort)),
+            (cursor) => cursor.toArray(),
+          )(cursorResult);
+
+          if (!includeCount) {
+            return result;
+          }
+
+          const data = await result;
+          const count = await cursorResult.count();
+
+          return [
+            data,
+            count,
+          ];
+        },
         collectionPromise,
       ),
     ),
