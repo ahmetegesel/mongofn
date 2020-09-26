@@ -84,7 +84,6 @@ This particular approach applies to all other curried functions within Mongofn.
 
 ## TODO
 
-- Implement limit, skip to find operations
 - Implement findAndModify
 - Implement insertOne
 - Implement updateOne
