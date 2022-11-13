@@ -1,12 +1,12 @@
 version: 2
 
 defaults: &defaults
-  docker:
-    - image: circleci/node
   working_directory: ~/mongofn
 
 jobs:
   test:
+    docker:
+      - image: circleci/node
     <<: *defaults
     steps:
       - checkout
