@@ -24,7 +24,8 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "mongodb": "^3.5.9",
     "ramda": "^0.27.0",
-    "rollup-plugin-delete": "^2.0.0"
+    "rollup-plugin-delete": "^2.0.0",
+    "core-js": "^3.26.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
