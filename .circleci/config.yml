@@ -3,20 +3,21 @@ version: 2
 defaults: &defaults
   docker:
     - image: circleci/node
+  working_directory: ~/mongofn
 
 jobs:
   test:
     <<: *defaults
     steps:
       - checkout
-      - run: npm install
+      - run: yarn
       - run:
           name: Run tests
-          command: npm test
+          command: yarn run test
   build:
     <<: *defaults
     steps:
-      - run: npm run build
+      - run: yarn run build
   release:
     <<: *defaults
     steps:
@@ -48,3 +49,6 @@ workflows:
               only: master
           requires:
             - build
+
+
+
