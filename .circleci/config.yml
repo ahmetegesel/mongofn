@@ -1,16 +1,15 @@
 version: 2
 
 jobs:
-  release:
+  build:
     working_directory: ~/mongofn
     docker:
-      - image: circleci/node
+      - image: cimg/node:16.18.1
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+      - run: |
+          git config --global user.email "ahmetegesel@hotmail.com"
+          git config --global user.name "Ahmet Egesel"
       - run: yarn
       - run:
           name: Run tests
@@ -29,19 +28,12 @@ jobs:
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
-      - persist_to_workspace:
-          root: ~/mongofn
-          paths: .
 
 workflows:
   version: 2
   test-release:
     jobs:
-      - release:
+      - build:
           filters:
             branches:
               only: master
