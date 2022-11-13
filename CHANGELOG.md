@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.9](https://github.com/ahmetegesel/mongofn/compare/v0.7.8...v0.7.9) (2022-11-13)
+
+
+### Bug Fixes
+
+* rollup external deps fix ([675ba55](https://github.com/ahmetegesel/mongofn/commit/675ba55ded1e215f5c8d92a7792ecaba9e457354))
+
 ### [0.7.8](https://github.com/ahmetegesel/mongofn/compare/v0.7.7...v0.7.8) (2022-11-13)
 
 
