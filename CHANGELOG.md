@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.8](https://github.com/ahmetegesel/mongofn/compare/v0.7.7...v0.7.8) (2022-11-13)
+
+
+### Bug Fixes
+
+* circleci config node version ([ae29795](https://github.com/ahmetegesel/mongofn/commit/ae297951c7e6b38527f5b549b37c6a4a23afd3ec))
+* package.json main path ([3f621bc](https://github.com/ahmetegesel/mongofn/commit/3f621bcbc8d533f995fd2f1d4a580a5a7f6cf770))
+
 ### [0.7.7](https://github.com/ahmetegesel/mongofn/compare/v0.7.6...v0.7.7) (2022-11-13)
 
 
