@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  publish:
     docker:
       - image: circleci/node
     steps:
@@ -26,6 +26,7 @@ jobs:
             npm publish
 
 workflows:
+  version: 2
   tagged-build:
   jobs:
     - publish:
