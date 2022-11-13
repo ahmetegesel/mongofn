@@ -9,7 +9,7 @@
     "test": "jest",
     "bump": "standard-version"
   },
-  "main": "./dist/index.cjs.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "files": [
     "dist"
