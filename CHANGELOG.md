@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.3](https://github.com/ahmetegesel/mongofn/compare/v0.7.2...v0.7.3) (2022-11-13)
+
+
+### Bug Fixes
+
+* circleci config file ([55c76f4](https://github.com/ahmetegesel/mongofn/commit/55c76f444a1138a00821d6717bd7414823983808))
+* circleci config file ([9079407](https://github.com/ahmetegesel/mongofn/commit/90794078c95b2d8d8bee236a4c75f7da1ae043da))
+* circleci config file ([8e2a8f0](https://github.com/ahmetegesel/mongofn/commit/8e2a8f067a9cebc72e32771d20963a0d4eb1422a))
+* circleci config file ([cd477ed](https://github.com/ahmetegesel/mongofn/commit/cd477edc24d8da173facf92fc5294890dfc63b6e))
+* circleci config file ([89061b2](https://github.com/ahmetegesel/mongofn/commit/89061b2cde5f2ca2d5643eb3d987392bd908b704))
+* circleci config file ([38bec08](https://github.com/ahmetegesel/mongofn/commit/38bec08565921590d81ee007430375e6bea986ca))
+* circleci config file ([3e866d9](https://github.com/ahmetegesel/mongofn/commit/3e866d90d42727120fb79c7db6b1826291b9bb65))
+* circleci config file ([61fdc29](https://github.com/ahmetegesel/mongofn/commit/61fdc294ae735d05bc3ed297c84a956159c822b1))
+* circleci config file ([a99d7e2](https://github.com/ahmetegesel/mongofn/commit/a99d7e2ad8752f62b3655161d44518d436a7d9c0))
+* circleci config file ([88bc746](https://github.com/ahmetegesel/mongofn/commit/88bc746dbf18cbe6b6490573118667f114f18466))
+
 ### 0.7.2 (2022-11-13)
 
 
