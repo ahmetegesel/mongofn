@@ -2,7 +2,9 @@ version: 2
 
 jobs:
   release:
-
+    working_directory: ~/mongofn
+    docker:
+      - image: circleci/node
     steps:
       - checkout
       - restore_cache:
