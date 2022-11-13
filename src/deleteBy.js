@@ -16,7 +16,7 @@ import dissolveFindParams from './internal/dissolveFindParams';
 /**
  * Takes a {@link MongoClientLike}, a database name, a collection name, and a predicate, then
  * returns `Promise` which resolves an `CommandResult` of result that matches given predicate in specified `Collection`
- * in MongoDB.
+ * in MongoDB and deletes the matched documents from the collection.
  *
  * `predicate` should be as documented at
  * [here](http://mongodb.github.io/node-mongodb-native/3.5/reference/ecmascriptnext/crud/#read-methods)
@@ -32,7 +32,7 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * @param {string} collectionName Collection name to get find results in.
  * @param {FindParams<object>} predicate FindParams object that represents the query.
  * @return {Promise<CommandResult>} Array of Document matching given predicate.
- * @see {@link deleteBy}, {@link createClient}
+ * @see {@link findBy}, {@link createClient}
  * @example
  *
  *      const client = createClient(...params);
@@ -40,11 +40,11 @@ import dissolveFindParams from './internal/dissolveFindParams';
  *        .then(console.log);
  *
  *      // partial re-usability
- *      const deleteCategoriesBy = findBy(someClient, 'someDb', 'categories');
+ *      const deleteCategoriesBy = deleteBy(someClient, 'someDb', 'categories');
  *      deleteCategoriesBy({ name: 'some name' }).then(console.log);
  *      deleteCategoriesBy({ approved: false }).then(console.log);
  *
- *      const deleteApproved = findBy(someClient, 'someDb', R.__, {approved: true})
+ *      const deleteApproved = deleteBy(someClient, 'someDb', R.__, {approved: true})
  *      deleteApproved('categories').then(console.log);
  *      deleteApproved('articles').then(console.log);
  */
