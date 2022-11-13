@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  release:
     working_directory: ~/mongofn
     docker:
       - image: cimg/node
@@ -23,9 +23,11 @@ jobs:
 
 workflows:
   version: 2
-  test-release:
+  release:
     jobs:
-      - build:
+      - release:
           filters:
+            tags:
+              only: /^\d+\.\d+\.\d+(-pre\.\d+)?$/
             branches:
-              only: master
+              ignore: /.*/

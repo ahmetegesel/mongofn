@@ -7,7 +7,7 @@
     "build": "rollup -c",
     "precommit": "npm run lint",
     "test": "jest",
-    "bump": "standard-version -m 'chore(release): %s [skip ci]'"
+    "bump": "standard-version"
   },
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
