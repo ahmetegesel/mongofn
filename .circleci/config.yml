@@ -1,26 +1,19 @@
 version: 2
 
-defaults: &defaults
-  working_directory: ~/mongofn
-
 jobs:
-  test:
-    docker:
-      - image: circleci/node
-    <<: *defaults
+  release:
+
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
       - run: yarn
       - run:
           name: Run tests
           command: yarn run test
-  build:
-    <<: *defaults
-    steps:
       - run: yarn run build
-  release:
-    <<: *defaults
-    steps:
       - run:
           name: "Versioning"
           command: |
@@ -34,21 +27,19 @@ jobs:
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+            - persist_to_workspace:
+                root: ~/mongofn
+                paths: .
 
 workflows:
   version: 2
   test-release:
     jobs:
-      - test
-      - build:
-          requires:
-            - test
       - release:
           filters:
             branches:
               only: master
-          requires:
-            - build
-
-
-
