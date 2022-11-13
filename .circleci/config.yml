@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/mongofn
+    docker:
+      - image: cimg/node:16.18.1
+    steps:
+      - checkout
+      - run: |
+          git config --global user.email "ahmetegesel@hotmail.com"
+          git config --global user.name "Ahmet Egesel"
+      - run: yarn
+      - run:
+          name: Run tests
+          command: yarn run test
+      - run: yarn run build
+      - run:
+          name: "Versioning"
+          command: |
+            ./node_modules/.bin/standard-version
+      - run:
+          name: "Pushing tags"
+          command: |
+            git push --follow-tags origin master
+      - run:
+          name: Publish to NPM
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
+
+workflows:
+  version: 2
+  test-release:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master

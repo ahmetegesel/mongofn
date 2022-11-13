@@ -1,22 +1,17 @@
 {
   "name": "mongofn",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
-    "clean": "rimraf es/* dist/*",
-    "build:es": "cross-env BABEL_ENV=es babel ./src --out-dir ./es",
-    "build:cjs": "babel ./src --out-dir ./dist",
-    "build": "npm run build:es && npm run build:cjs",
+    "build": "rollup -c",
     "precommit": "npm run lint",
-    "prepublishOnly": "npm run precommit && npm run clean && npm run build",
-    "postpublish": "npm run clean",
-    "test": "jest"
+    "test": "jest",
+    "bump": "standard-version"
   },
-  "main": "./dist/index.js",
-  "module": "./es/index.js",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
   "files": [
-    "es",
     "dist"
   ],
   "repository": {
@@ -24,8 +19,11 @@
     "url": "git+https://github.com/ahmetegesel/mongofn.git"
   },
   "dependencies": {
+    "@rollup/plugin-babel": "^6.0.2",
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "mongodb": "^3.5.9",
     "ramda": "^0.27.0",
-    "mongodb": "^3.5.9"
+    "rollup-plugin-delete": "^2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
@@ -34,18 +32,17 @@
     "@babel/plugin-proposal-export-default-from": "^7.10.4",
     "@babel/plugin-proposal-throw-expressions": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@types/jest": "^26.0.12",
+    "@types/ramda": "^0.27.6",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.3.0",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-import": "^2.22.0",
-    "babel-eslint": "^10.1.0",
-    "@types/ramda": "^0.27.6",
-    "rimraf": "^3.0.2",
-    "cross-env": "^7.0.2",
+    "eslint-plugin-node": "^11.1.0",
     "jest": "^26.4.2",
-    "babel-jest": "^26.3.0",
-    "@types/jest": "^26.0.12"
+    "rollup": "^3.3.0",
+    "standard-version": "^9.5.0"
   },
   "keywords": [
     "mongofn",

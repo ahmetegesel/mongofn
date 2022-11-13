@@ -24,3 +24,5 @@ typings/
 
 # JetBrains
 .idea
+
+.env
