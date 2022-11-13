@@ -1,16 +1,26 @@
-version: 2.1
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:14.15.3
 
 jobs:
-  publish:
-    docker:
-      - image: circleci/node
+  test:
+    <<: *defaults
     steps:
       - checkout
       - run: yarn
       - run:
-          name: "Building"
-          command: |
-            yarn run build
+          name: Run tests
+          command: yarn run test
+  build:
+    <<: *defaults
+    steps:
+      - run: yarn run build
+  release:
+    <<: *defaults
+    steps:
       - run:
           name: "Versioning"
           command: |
@@ -27,9 +37,15 @@ jobs:
 
 workflows:
   version: 2
-  tagged-build:
-  jobs:
-    - publish:
-        filters:
-        tags:
-          only: /v[0-9]+(\.[0-9]+)*/
+  test-deploy:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+      - release:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
