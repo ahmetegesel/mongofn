@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: yarn
+      - run:
+          name: "Building"
+          command: |
+            yarn run build
+      - run:
+          name: "Versioning"
+          command: |
+            standard-version
+      - run:
+          name: "Pushing tags"
+          command: |
+            git push --follow-tags origin master
+      - run:
+          name: Publish to NPM
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
+
+workflows:
+  tagged-build:
+  jobs:
+    - publish:
+        filters:
+        tags:
+          only: /v[0-9]+(\.[0-9]+)*/
