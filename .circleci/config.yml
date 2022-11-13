@@ -30,4 +30,4 @@ workflows:
             tags:
               only: /^\d+\.\d+\.\d+(-pre\.\d+)?$/
             branches:
-              ignore: /.*/
+              only: master
