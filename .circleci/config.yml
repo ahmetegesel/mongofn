@@ -9,14 +9,14 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: yarn
+      - run: npm install
       - run:
           name: Run tests
-          command: yarn run test
+          command: npm test
   build:
     <<: *defaults
     steps:
-      - run: yarn run build
+      - run: npm run build
   release:
     <<: *defaults
     steps:
@@ -36,7 +36,7 @@ jobs:
 
 workflows:
   version: 2
-  test-deploy:
+  test-release:
     jobs:
       - test
       - build:
