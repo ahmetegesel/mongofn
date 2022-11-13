@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Versioning"
           command: |
-            standard-version
+            ./node_modules/.bin/standard-version
       - run:
           name: "Pushing tags"
           command: |
