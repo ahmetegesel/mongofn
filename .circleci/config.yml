@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/mongofn
     docker:
-      - image: cimg/node:16.18.1
+      - image: cimg/node
     steps:
       - checkout
       - run: |
@@ -15,14 +15,6 @@ jobs:
           name: Run tests
           command: yarn run test
       - run: yarn run build
-      - run:
-          name: "Versioning"
-          command: |
-            ./node_modules/.bin/standard-version
-      - run:
-          name: "Pushing tags"
-          command: |
-            git push --follow-tags origin master
       - run:
           name: Publish to NPM
           command: |
