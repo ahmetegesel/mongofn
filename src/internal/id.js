@@ -1,5 +1,5 @@
 import {
-  isNil, omit, pipe, prop, when,
+  isNil, omit, pipe, prop, when
 } from 'ramda';
 import { ObjectId } from 'mongodb';
 
@@ -10,7 +10,14 @@ export const castDocId = (id) => {
     return id;
   }
 
-  return when(ObjectId.isValid, ObjectId)(id);
+  return when(validateObjectId, ObjectId)(id);
+};
+export const validateObjectId = (id) => {
+  if(ObjectId.isValid(id)){
+    return (String)(new ObjectId(id)) === id;
+
+  }
+  return false;
 };
 export const withoutId = omit(['_id']);
 export const removeUndefinedId = when(pipe(docId, isNil), omit(['_id']));
