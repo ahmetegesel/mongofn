@@ -4,7 +4,7 @@ module.exports = {
   rules: {
     'max-len': ['error', 150, 2],
   },
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     sourceType: 'module',
   },

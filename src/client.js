@@ -72,7 +72,7 @@ export const createClient = (
  * @return {Promise} An Instance of MongoDB Client.
  * @example
  *
- * const useMainClient = useMemoizedClient(
+ * const mainClient = useMemoizedClient(
  'mongodb://username:password@localhost:27017',
  {
     useNewUrlParser: true,
@@ -82,7 +82,7 @@ export const createClient = (
 
  // fns given below use the same instance of client all the time.
  // client is instantiated only once.
- const useDbInMainClient = useDb(useMainClient);
+ const useDbInMainClient = useDb(mainClient);
  useDbInMainClient('someDb').then(console.log);
  useDbInMainClient('someOtherDb').then(console.log);
 
