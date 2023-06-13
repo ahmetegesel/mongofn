@@ -10,16 +10,35 @@ jobs:
       - run: |
           git config --global user.email "ahmetegesel@hotmail.com"
           git config --global user.name "Ahmet Egesel"
-      - run: yarn
+      - run: pnpm
       - run:
           name: Run tests
-          command: yarn run test
-      - run: yarn run build
+          command: pnpm test
+      - run: pnpm build
       - run:
           name: Publish to NPM
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
+  release-beta:
+    working_directory: ~/mongofn
+    docker:
+      - image: cimg/node:16.18.1
+    steps:
+      - checkout
+      - run: |
+          git config --global user.email "ahmetegesel@hotmail.com"
+          git config --global user.name "Ahmet Egesel"
+      - run: pnpm i
+      - run:
+          name: Run tests
+          command: pnpm test
+      - run: pnpm build
+      - run:
+          name: Publish Beta to NPM
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish --tag beta
 
 workflows:
   version: 2
@@ -31,3 +50,10 @@ workflows:
               only: /^\d+\.\d+\.\d+(-pre\.\d+)?$/
             branches:
               only: master
+  release-beta:
+    jobs:
+      - hold:
+          type: approval
+      - release-beta:
+          requires:
+            - hold

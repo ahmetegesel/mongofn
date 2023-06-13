@@ -10,7 +10,7 @@ export const castDocId = (id) => {
     return id;
   }
 
-  return when(validateObjectId, ObjectId)(id);
+  return when(validateObjectId, () => new ObjectId(id))(id);
 };
 export const validateObjectId = (id) => {
   if(ObjectId.isValid(id)){

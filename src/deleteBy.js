@@ -25,7 +25,7 @@ import dissolveFindParams from './internal/dissolveFindParams';
  * Since [Ramda](https://ramdajs.com/) is used for currying, you can also use [R.__](https://ramdajs.com/docs/#__)
  * placeholder to allow partial application of any combination of arguments of this particular function.
  *
- * @func findBy
+ * @func deleteBy
  * @since v0.1.0
  * @param {MongoClientLike} client {@link MongoClient} instance
  * @param {string} databaseName Database name to get the collection from.
@@ -58,8 +58,9 @@ const deleteBy = uncurryN(
         async (collection) => {
           const {
             query,
+            ...options
           } = dissolveFindParams(predicate);
-          return collection.deleteMany(query);
+          return collection.deleteMany(query, options);
         },
         collectionPromise,
       ),

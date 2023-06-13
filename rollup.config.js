@@ -1,5 +1,6 @@
 const { babel } = require('@rollup/plugin-babel');
 const del = require('rollup-plugin-delete');
+const copy = require('rollup-plugin-copy');
 const resolve = require('@rollup/plugin-node-resolve');
 
 exports.default = {
@@ -11,6 +12,7 @@ exports.default = {
       babelrc: true,
       comments: true,
     }),
+    copy({ targets: [{ src: 'typings/**/*.d.ts', dest: 'dist/typings'}] }),
   ],
   output: [
     {
