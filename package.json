@@ -1,6 +1,6 @@
 {
   "name": "mongofn",
-  "version": "0.7.17",
+  "version": "0.7.18",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
@@ -52,7 +52,7 @@
     "standard-version": "^9.5.0",
     "typescript": "^5.0.4"
   },
-  "pnpm":  {
+  "pnpm": {
     "overrides": {
       "whatwg-url": "^8.2.1"
     }
