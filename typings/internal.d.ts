@@ -5,7 +5,7 @@ type MongoDocument<TSchema extends { [key: string]: any } = Document> = TSchema 
 export declare function mapResultWith<TSchema extends MongoDocument>(
   transform: <TItem extends Document = Document> (item: TSchema) => TItem, result: MongoDocument<TSchema> | MongoDocument<TSchema>[]
 ): TSchema | TSchema[]
-export declare function mapResultWith<TSchema extends MongoDocument<TSchema>>(
+export declare function mapResultWith<TSchema extends MongoDocument>(
   transform: <TItem extends Document = Document> (item: TSchema) => TItem
 ): (result: MongoDocument<TSchema> | MongoDocument<TSchema>[]) => TSchema | TSchema[]
 

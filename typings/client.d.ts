@@ -8,6 +8,7 @@ declare type MongoClientLike = string| Promise<MongoClient> | MongoClient | (() 
 
 export {
     createClient,
+    useMemoizedClient,
     DEFAULT_OPTIONS,
     MongoClientLike,
 }
