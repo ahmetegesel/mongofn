@@ -1,7 +1,7 @@
-import {Document, InsertOneResult, ModifyResult, OptionalUnlessRequiredId} from "mongodb";
+import {Document, InsertOneResult, OptionalUnlessRequiredId} from "mongodb";
 import {MongoClientLike} from "./client";
 
-type UpsertResult<TSchema extends Document = Document> = InsertOneResult<TSchema> | ModifyResult<TSchema>
+type UpsertResult<TSchema extends Document = Document> = InsertOneResult<TSchema> | TSchema
 
 type UpsertDocument<TSchema extends Document = Document> = OptionalUnlessRequiredId<TSchema> | TSchema
 
