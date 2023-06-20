@@ -7,10 +7,7 @@ import { MongoClient } from 'mongodb';
  * @type {object}
  * @constant
  * */
-export const DEFAULT_OPTIONS = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+export const DEFAULT_OPTIONS = {};
 
 /**
  * It can be either a connectionString as it is documented at official mongodb docs,
@@ -38,11 +35,7 @@ export const DEFAULT_OPTIONS = {
  * @example
  *
  * createClient(
- 'mongodb://username:password@localhost:27017',
- {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
+ 'mongodb://username:password@localhost:27017',{}
  ).then(client => {
     return client.db('dbName').collection('collectionName');
   }
@@ -51,8 +44,8 @@ export const DEFAULT_OPTIONS = {
  */
 export const createClient = (
   connectionString,
-  options = DEFAULT_OPTIONS,
-) => MongoClient.connect(connectionString, options);
+  options ,
+) => MongoClient.connect(connectionString, options || DEFAULT_OPTIONS);
 
 /**
  * Connects to a MongoDB instance using given `connectionString` and `options`,
