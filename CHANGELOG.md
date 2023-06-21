@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.20](https://github.com/ahmetegesel/mongofn/compare/v0.7.18...v0.7.20) (2023-06-20)
+
+
+### Bug Fixes
+
+* add types ([5da0b0d](https://github.com/ahmetegesel/mongofn/commit/5da0b0d5d0f988ab51a30087f2e3823d45fb7371))
+* fix null options ([6dbcfc0](https://github.com/ahmetegesel/mongofn/commit/6dbcfc0bd2be3a31d4d21b36239ae6b015862f22))
+
 ### [0.7.19](https://github.com/ahmetegesel/mongofn/compare/v0.7.18...v0.7.19) (2023-06-19)
 
 ### Bug Fixes
