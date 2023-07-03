@@ -1,5 +1,5 @@
 import {
-  andThen, head, ifElse, inc, pipe, prop, uncurryN,
+  andThen, ifElse, inc, pipe, prop, uncurryN,
 } from 'ramda';
 
 import useCollection from './useCollection';
@@ -8,14 +8,15 @@ import { docId, withoutId } from './internal/id';
 
 /**
  * Handles the result of collection.insertOne in MongoDB Driver in a way that
- * it picks only the inserted document from the result.
+ * it takes in the id from the insertOne function result and retrieves the inserted document from it.
  *
  * @func
  * @since v0.1.0
- * @param {object} cursorResult Cursor result of insertOne function.
+ * @param {object} collection - The MongoDB collection object.
+ * @param {object} upsertResult - The cursor result of the `insertOne` function.
  * @return {object} Inserted document.
  * */
-const handleInsertOneResult = pipe(prop('ops'), head);
+const handleInsertOneResult = (collection) => (upsertResult) => collection.findOne({ _id: upsertResult.insertedId });
 
 /**
  * Handles the result of collection.findOneAndUpdate in MongoDB Driver in a way that
@@ -79,14 +80,14 @@ const upsert = uncurryN(
         ifElse(
           () => isNilOrEmpty(docId(doc)),
           // insert when id is nil
-          (collection) => andThen(handleInsertOneResult, collection.insertOne(doc)),
+          (collection) => andThen(handleInsertOneResult(collection), collection.insertOne(doc)),
           // else update the document by finding it with its id
           (collection) => andThen(
             handleFindOneAndUpdateResult,
             collection.findOneAndUpdate(
               { _id: docId(doc) },
               { $set: withoutId(doc) },
-              { upsert: true, returnOriginal: false },
+              { upsert: true, returnDocument: 'after' },
             ),
           ),
         ),
