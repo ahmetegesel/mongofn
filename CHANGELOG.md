@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.21](https://github.com/ahmetegesel/mongofn/compare/v0.7.20...v0.7.21) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix new mongodb return value ([218d69f](https://github.com/ahmetegesel/mongofn/commit/218d69fac3c394ae9efac00ec7961e1fa6d2aed3))
+
 ### [0.7.20](https://github.com/ahmetegesel/mongofn/compare/v0.7.18...v0.7.20) (2023-06-20)
 
 
