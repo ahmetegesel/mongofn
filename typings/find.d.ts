@@ -11,17 +11,17 @@ declare function findBy<TSchema extends Document = Document>(client: MongoClient
 declare function findBy<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string, predicate: Predicate<FindOptions, TSchema>) => Promise<FindResult<TSchema>>;
 declare function findBy<TSchema extends Document = Document>(client: MongoClientLike): (databaseName: string) => (collectionName: string) => (predicate: Predicate<FindOptions, TSchema>) => Promise<FindResult<TSchema>>;
 
-declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string, id: FindIdParams): Promise<WithId<TSchema>>;
-declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string): (id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string, id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findById<TSchema extends Document = Document>(client: MongoClientLike): (databaseName: string) => (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema>>;
+declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string, id: FindIdParams): Promise<WithId<TSchema> | null>;
+declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string): (id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findById<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string, id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findById<TSchema extends Document = Document>(client: MongoClientLike): (databaseName: string) => (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema> | null>;
 
-declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string, id: FindIdParams): Promise<WithId<TSchema>>;
-declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string): (id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string, id: FindIdParams) => Promise<WithId<TSchema>>;
-declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike): (databaseName: string) => (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema>>;
+declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string, id: FindIdParams): Promise<WithId<TSchema> | null>;
+declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string): (id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string, id: FindIdParams) => Promise<WithId<TSchema> | null>;
+declare function findByObjectId<TSchema extends Document = Document>(client: MongoClientLike): (databaseName: string) => (collectionName: string) => (id: FindIdParams) => Promise<WithId<TSchema> | null>;
 
 declare function findAll<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string, collectionName: string): Promise<FindResult<TSchema>>;
 declare function findAll<TSchema extends Document = Document>(client: MongoClientLike, databaseName: string): (collectionName: string) => Promise<FindResult<TSchema>>;

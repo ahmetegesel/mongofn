@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.23](https://github.com/ahmetegesel/mongofn/compare/v0.7.22...v0.7.23) (2023-07-26)
+
+### [0.7.22](https://github.com/ahmetegesel/mongofn/compare/v0.7.21...v0.7.22) (2023-07-13)
+
 ### [0.7.21](https://github.com/ahmetegesel/mongofn/compare/v0.7.20...v0.7.21) (2023-07-03)
 
 
