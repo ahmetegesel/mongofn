@@ -5,10 +5,12 @@ import {
 import {
   castDocId, docId, modelId, removeUndefinedId,
 } from './id';
+import isNilOrEmpty from './isNilOrEmpty';
 
 export const mapResultWith = curry(
   (transform, result) => cond(
     [
+      [isNilOrEmpty, always(() => null)],
       [equals('Array'), always(map(transform, result))],
       // else
       [T, always(transform(result))],
