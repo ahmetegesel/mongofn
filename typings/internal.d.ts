@@ -1,16 +1,14 @@
-import {Document, WithId} from "mongodb";
+import {WithId} from "mongodb";
 
-type MongoDocument<TSchema extends { [key: string]: any } = Document> = TSchema | WithId<TSchema>;
+export declare function mapResultWith<T>(
+  transform: <TItem> (item: TItem | null) => TItem, result: T | T[]
+): T | T[] | null
+export declare function mapResultWith<T>(
+  transform: <TItem> (item: TItem | null) => TItem
+): (result: T | T[]) => T | T[] | null
 
-export declare function mapResultWith<TSchema extends MongoDocument>(
-  transform: <TItem extends Document> (item: TItem | null) => TItem, result: MongoDocument<TSchema> | MongoDocument<TSchema>[]
-): TSchema | TSchema[] | null
-export declare function mapResultWith<TSchema extends MongoDocument>(
-  transform: <TItem extends Document> (item: TItem | null) => TItem
-): (result: MongoDocument<TSchema> | MongoDocument<TSchema>[]) => TSchema | TSchema[] | null
+export declare function toModel<TSchema>(doc: Array<WithId<TSchema>>): Array<TSchema>;
+export declare function toModel<TSchema>(doc: WithId<TSchema>): TSchema;
+export declare function toModel<TSchema>(doc: WithId<TSchema> | null): TSchema | null;
 
-export declare function toModel<TSchema extends Document>(doc: WithId<TSchema> | null): TSchema | null;
-export declare function toModel<TSchema extends Document>(doc: Array<WithId<TSchema>> | null): Array<TSchema> | null;
-export declare function toModel<TSchema extends Document>(doc: TSchema | null): TSchema | null;
-
-export declare function toDoc<TSchema extends Document>(model: TSchema): WithId<TSchema>;
+export declare function toDoc<TSchema>(model: TSchema): WithId<TSchema>;
