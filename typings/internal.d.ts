@@ -21,8 +21,12 @@ export declare type OptionalUnlessRequiredId<TSchema> = TSchema extends {
     id: any;
 } ? TSchema : OptionalId<TSchema>;
 
-export declare function toModel<TSchema>(doc: Array<WithId<TSchema>>): Array<OptionalUnlessRequiredId<TSchema>>;
-export declare function toModel<TSchema>(doc: WithId<TSchema>): OptionalUnlessRequiredId<TSchema>;
-export declare function toModel<TSchema>(doc: WithId<TSchema> | null): OptionalUnlessRequiredId<TSchema> | null;
+export declare type WithModelId<TSchema> = EnhancedOmit<TSchema, '_id'> & {
+    id: InferModelIdType<TSchema>;
+};
+
+export declare function toModel<TSchema>(doc: Array<WithId<TSchema>>): Array<WithModelId<TSchema>>;
+export declare function toModel<TSchema>(doc: WithId<TSchema>): WithModelId<TSchema>;
+export declare function toModel<TSchema>(doc: WithId<TSchema> | null): WithModelId<TSchema> | null;
 
 export declare function toDoc<T, TSchema>(model: OptionalUnlessRequiredId<T>): WithId<TSchema>;
