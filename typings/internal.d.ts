@@ -1,4 +1,4 @@
-import {EnhancedOmit, WithId} from "mongodb";
+import { EnhancedOmit, WithId } from "mongodb";
 
 export declare function mapResultWith<T, TItem, PItem>(
     transform:  (item: TItem | null) => PItem  | null, result: T[]
@@ -37,3 +37,7 @@ export declare function toModel<TSchema>(doc: WithId<TSchema>): WithModelId<TSch
 export declare function toModel<TSchema>(doc: WithId<TSchema> | null): WithModelId<TSchema> | null;
 
 export declare function toDoc<T, TSchema>(model: OptionalUnlessRequiredId<T>): WithId<TSchema>;
+
+export declare function isResultWithoutCount<T>(value: T[] | [T[], number]): value is T[]
+
+export declare function toModelWithCount<T>(value: WithId<T>[] | [WithId<T>[], number]): WithModelId<T>[] | [WithModelId<T>[], number];
