@@ -1,11 +1,17 @@
 import {EnhancedOmit, WithId} from "mongodb";
 
-export declare function mapResultWith<T>(
-  transform: <TItem> (item: TItem | null) => TItem, result: T | T[]
-): T | T[] | null
-export declare function mapResultWith<T>(
-  transform: <TItem> (item: TItem | null) => TItem
-): (result: T | T[]) => T | T[] | null
+export declare function mapResultWith<T, TItem, PItem>(
+    transform:  (item: TItem | null) => PItem  | null, result: T[]
+): PItem[] | null
+export declare function mapResultWith<T,TItem, PItem>(
+    transform:  (item: TItem | null) => PItem  | null, result: T
+):  PItem | null
+export declare function mapResultWith<T,TItem, PItem>(
+    transform: (item: TItem | null) => PItem | null
+): (result: T ) =>  PItem | null
+export declare function mapResultWith<T,TItem, PItem>(
+    transform: (item: TItem | null) => PItem | null
+): (result: T []) =>  PItem[] | null
 
 export declare type InferModelIdType<TSchema> = TSchema extends {
     id: infer IdType;
@@ -26,6 +32,7 @@ export declare type WithModelId<TSchema> = EnhancedOmit<TSchema, '_id'> & {
 };
 
 export declare function toModel<TSchema>(doc: Array<WithId<TSchema>>): Array<WithModelId<TSchema>>;
+export declare function toModel<TSchema>(doc: Array<WithId<TSchema>> | null): Array<WithModelId<TSchema>> | null;
 export declare function toModel<TSchema>(doc: WithId<TSchema>): WithModelId<TSchema>;
 export declare function toModel<TSchema>(doc: WithId<TSchema> | null): WithModelId<TSchema> | null;
 
