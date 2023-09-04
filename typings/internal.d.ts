@@ -36,7 +36,8 @@ export declare function toModel<TSchema>(doc: Array<WithId<TSchema>> | null): Ar
 export declare function toModel<TSchema>(doc: WithId<TSchema>): WithModelId<TSchema>;
 export declare function toModel<TSchema>(doc: WithId<TSchema> | null): WithModelId<TSchema> | null;
 
-export declare function toDoc<T, TSchema>(model: OptionalUnlessRequiredId<T>): WithId<TSchema>;
+export declare function toDoc<T>(model: WithModelId<T>): WithId<T>;
+export declare function toDoc<T>(model: OptionalUnlessRequiredId<T>): WithId<T>;
 
 export declare function isResultWithoutCount<T>(value: T[] | [T[], number]): value is T[]
 
