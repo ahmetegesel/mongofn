@@ -1,6 +1,6 @@
 export { __ } from 'ramda';
 
-export { mapResultWith, toDoc, toModel } from './internal/mapResult';
+export { mapResultWith, toDoc, toModel, isResultWithoutCount, toModelWithCount } from './internal/mapResult';
 
 export { createClient, useMemoizedClient } from './client';
 export useDb from './useDb';
