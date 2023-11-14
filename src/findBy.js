@@ -65,6 +65,7 @@ const findBy = uncurryN(
             query, skip, limit, sort, includeCount, ...options
           } = dissolveFindParams(predicate);
           const cursorResult = collection.find(query, options);
+          const count = await cursorResult.count();
 
           const result = pipe(
             ifElse(() => isNil(skip), identity, (cursor) => cursor.skip(skip)),
@@ -78,12 +79,11 @@ const findBy = uncurryN(
           }
 
           const data = await result;
-          const count = await cursorResult.count();
 
-          return [
+          return {
             data,
             count,
-          ];
+          };
         },
         collectionPromise,
       ),
