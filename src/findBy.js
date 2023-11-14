@@ -80,10 +80,10 @@ const findBy = uncurryN(
 
           const data = await result;
 
-          return [
+          return {
             data,
             count,
-          ];
+          };
         },
         collectionPromise,
       ),
