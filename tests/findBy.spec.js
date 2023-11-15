@@ -16,6 +16,7 @@ describe('findBy tests', () => {
   const sampleCollection = {
     find: jest.fn().mockReturnValue({
       toArray,
+      count: jest.fn(),
     }),
   };
   useCollection.mockResolvedValue(sampleCollection);
