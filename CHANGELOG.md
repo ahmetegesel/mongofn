@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.25](https://github.com/ahmetegesel/mongofn/compare/v0.7.13...v0.7.25) (2023-11-21)
+
+
+### Features
+
+* add OptionalUnlessRequiredId ([2ff5363](https://github.com/ahmetegesel/mongofn/commit/2ff536343d196a26fe6f8a7e065e56005ab2374e))
+* add toModelWithCount func ([df8eb64](https://github.com/ahmetegesel/mongofn/commit/df8eb646592bdbea258519a818f4902680882f1c))
+* add WithModelId type ([b28ac8f](https://github.com/ahmetegesel/mongofn/commit/b28ac8f49fb568be1a88ce909d46ad7509d562b6))
+* typescript integration ([dee4ba7](https://github.com/ahmetegesel/mongofn/commit/dee4ba7ed194ff9571a9126b7f0cfcf1277d629c))
+
+
+### Bug Fixes
+
+* add new funcs to index ([33d4320](https://github.com/ahmetegesel/mongofn/commit/33d432044e98ecf3034fb7e40471ab58ede33bcf))
+* add types ([5da0b0d](https://github.com/ahmetegesel/mongofn/commit/5da0b0d5d0f988ab51a30087f2e3823d45fb7371))
+* add types ([62609d0](https://github.com/ahmetegesel/mongofn/commit/62609d04c4b972662bc6429843e800843d62ad8f))
+* findby data count error ([b708db5](https://github.com/ahmetegesel/mongofn/commit/b708db51c8082ba8b591ff6d0fe0777493fcdff9))
+* fix new mongodb return value ([218d69f](https://github.com/ahmetegesel/mongofn/commit/218d69fac3c394ae9efac00ec7961e1fa6d2aed3))
+* fix null options ([6dbcfc0](https://github.com/ahmetegesel/mongofn/commit/6dbcfc0bd2be3a31d4d21b36239ae6b015862f22))
+* object id validation ([20b066d](https://github.com/ahmetegesel/mongofn/commit/20b066dd2afa1edba91e12ad04ad337a8252c182)), closes [#17](https://github.com/ahmetegesel/mongofn/issues/17)
+* pipeline fix ([b0cfe23](https://github.com/ahmetegesel/mongofn/commit/b0cfe2301ea3e7cc1164c752e912f3bf8edf945b))
+
 ### [0.7.23](https://github.com/ahmetegesel/mongofn/compare/v0.7.22...v0.7.23) (2023-07-26)
 
 ### [0.7.22](https://github.com/ahmetegesel/mongofn/compare/v0.7.21...v0.7.22) (2023-07-13)
