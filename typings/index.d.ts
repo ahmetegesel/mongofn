@@ -5,3 +5,4 @@ export * from './find';
 export * from './delete';
 export * from './upsert';
 export * from './internal';
+export * from './utils';

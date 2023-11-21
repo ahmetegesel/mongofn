@@ -5,10 +5,12 @@ import {
 import {
   castDocId, docId, modelId, removeUndefinedId,
 } from './id';
+import isNilOrEmpty from './isNilOrEmpty';
 
 export const mapResultWith = curry(
   (transform, result) => cond(
     [
+      [isNilOrEmpty, always(() => null)],
       [equals('Array'), always(map(transform, result))],
       // else
       [T, always(transform(result))],
@@ -24,3 +26,15 @@ export const toDoc = mapResultWith(
     },
   ),
 );
+
+export function isResultWithoutCount(value) {
+  return !Array.isArray(value[0]);
+}
+
+export function toModelWithCount(value) {
+  if (!isResultWithoutCount(value)) {
+    return [toModel(value[0]), value[1]];
+  }
+
+  return toModel(value);
+}

@@ -1,3 +1,3 @@
-import {Document, Filter} from "mongodb";
+import {Filter} from "mongodb";
 
-export type Predicate<TOptions, TSchema extends Document = Document> = Filter<TSchema> | [Filter<TSchema>, TOptions];
+export type Predicate<TOptions, TSchema> = Filter<TSchema> | [Filter<TSchema>, TOptions];
