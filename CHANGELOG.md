@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.26](https://github.com/ahmetegesel/mongofn/compare/v0.7.13...v0.7.26) (2023-11-29)
+
+
+### Features
+
+* typescript integration ([dee4ba7](https://github.com/ahmetegesel/mongofn/commit/dee4ba7ed194ff9571a9126b7f0cfcf1277d629c))
+
+
+### Bug Fixes
+
+* add types ([5da0b0d](https://github.com/ahmetegesel/mongofn/commit/5da0b0d5d0f988ab51a30087f2e3823d45fb7371))
+* add types ([62609d0](https://github.com/ahmetegesel/mongofn/commit/62609d04c4b972662bc6429843e800843d62ad8f))
+* findby count wrong calculation ([#30](https://github.com/ahmetegesel/mongofn/issues/30)) ([927a0cf](https://github.com/ahmetegesel/mongofn/commit/927a0cf2e69ac385aa47d083de7af262777189a9))
+* fix new mongodb return value ([218d69f](https://github.com/ahmetegesel/mongofn/commit/218d69fac3c394ae9efac00ec7961e1fa6d2aed3))
+* fix null options ([6dbcfc0](https://github.com/ahmetegesel/mongofn/commit/6dbcfc0bd2be3a31d4d21b36239ae6b015862f22))
+* object id validation ([20b066d](https://github.com/ahmetegesel/mongofn/commit/20b066dd2afa1edba91e12ad04ad337a8252c182)), closes [#17](https://github.com/ahmetegesel/mongofn/issues/17)
+* pipeline fix ([b0cfe23](https://github.com/ahmetegesel/mongofn/commit/b0cfe2301ea3e7cc1164c752e912f3bf8edf945b))
+
 ### 0.7.25 (2023-11-21)
 
 
