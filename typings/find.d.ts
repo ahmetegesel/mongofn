@@ -3,7 +3,7 @@ import {FindOptions, WithId} from "mongodb";
 import {Predicate} from "./utils";
 
 type FindResult<TSchema> = WithId<TSchema>[] | [WithId<TSchema>[], number];
-type FindIdParams = string | [string, Pick<FindOptions, "projection">]
+type FindIdParams = string | number | [string | number, Pick<FindOptions, "projection">];
 
 declare function findBy<TSchema>(client: MongoClientLike, databaseName: string, collectionName: string, predicate: Predicate<FindOptions, TSchema>): Promise<FindResult<TSchema>>;
 declare function findBy<TSchema>(client: MongoClientLike, databaseName: string, collectionName: string): (predicate: Predicate<FindOptions, TSchema>) => Promise<FindResult<TSchema>>;
