@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.28](https://github.com/ahmetegesel/mongofn/compare/v0.7.27...v0.7.28) (2023-12-14)
+
+
+### Features
+
+* add union support ([cd3ac8c](https://github.com/ahmetegesel/mongofn/commit/cd3ac8cc6620564a9ee892e07cafab5b71ca9768))
+
 ### 0.7.27 (2023-12-02)
 
 
