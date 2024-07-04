@@ -8,22 +8,21 @@ import {
 import isNilOrEmpty from './isNilOrEmpty';
 
 export const mapResultWith = curry(
-  (transform, result) => cond(
-    [
-      [isNilOrEmpty, always(() => null)],
-      [equals('Array'), always(map(transform, result))],
-      // else
-      [T, always(transform(result))],
-    ],
-  )(type(result)),
-);
-export const toModel = mapResultWith((item) => {
-  if (isNilOrEmpty(item)) {
-    return item;
-  }
+  (transform, result) => {
+    if (isNilOrEmpty(result)) {
+      return null;
+    }
 
-  return { id: docId(item), ...omit(['_id'], item) };
-});
+    return cond(
+      [
+        [equals('Array'), always(map(transform, result))],
+        // else
+        [T, always(transform(result))],
+      ],
+    )(type(result));
+  },
+);
+export const toModel = mapResultWith((item) => ({ id: docId(item), ...omit(['_id'], item) }));
 export const toDoc = mapResultWith(
   (item) => removeUndefinedId(
     {
