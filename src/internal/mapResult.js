@@ -10,7 +10,7 @@ import isNilOrEmpty from './isNilOrEmpty';
 export const mapResultWith = curry(
   (transform, result) => {
     if (isNilOrEmpty(result)) {
-      return null;
+      return result;
     }
 
     return cond(
