@@ -1,6 +1,6 @@
 {
   "name": "mongofn",
-  "version": "0.7.30",
+  "version": "0.7.31",
   "description": "A practical library to provide you functional mongodb development.",
   "scripts": {
     "lint": "eslint -c ./.eslintrc.js --ext js ./ --fix",
